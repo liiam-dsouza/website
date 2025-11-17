@@ -1,0 +1,19 @@
+---
+import Link from "./Link.astro"
+
+import { SOCIAL_LINKS } from "../consts"
+---
+<div class="border-b-4 border-primary border-dotted flex flex-col items-center text-center p-4 md:p-8 mb-8 md:mt-0 mt-4">
+    <img src="logo.png" alt="Logo" class="md:w-1/2" />
+    <p class="md:w-3/5">
+        Hello. I'm Liam. This website is a place for me to show off some of the things I've made and done. Feel free to explore!
+    </p>
+
+    <div class="flex flex-row gap-x-8 mt-2">
+        {
+            SOCIAL_LINKS.map((link) => (
+                <Link url={link.url} text={link.name} />
+            ))
+        }
+    </div>
+</div>

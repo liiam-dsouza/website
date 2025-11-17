@@ -1,0 +1,18 @@
+---
+import "../styles/global.css"
+
+interface Props {
+    title: string
+    description: string
+    image?: string
+}
+---
+
+<link rel="icon" href="favicon.ico" sizes="any" />
+<title>{Astro.props.title} « Liam D'Souza</title>
+
+<meta charset="utf-8" />
+		
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<meta name="description" content={Astro.props.description} />

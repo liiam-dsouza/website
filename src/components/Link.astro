@@ -1,0 +1,10 @@
+---
+interface Props {
+    url: string
+    text: string
+}
+
+const { url, text } = Astro.props
+---
+
+<a href={url} class="underline decoration-dotted decoration-primary decoration-2 text-primary">{text}</a>
