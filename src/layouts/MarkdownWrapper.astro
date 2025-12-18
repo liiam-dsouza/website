@@ -23,7 +23,7 @@ const { frontmatter } = Astro.props as Props
 
 <Main title={ frontmatter.title } description={ frontmatter.description }>
     <article>
-        <div class="prose max-w-3/4 mx-auto">
+        <div class="prose md:max-w-3/4 max-w-full px-4 mx-auto">
             <h2 class="mb-8 text-3xl font-medium mx-auto">{ frontmatter.title }</h2>
             <div class="mb-4 flex flex-wrap gap-2">
                 { frontmatter.tags && ( frontmatter.tags.sort().map((tag) => (

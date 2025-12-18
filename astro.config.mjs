@@ -13,6 +13,5 @@ export default defineConfig({
   },
 
   integrations: [ icon(), mdx() ],
-  site: "https://liiam-dsouza.github.io",
-  base: "/website",
+  site: "https://liamdsouza.com",
 })
