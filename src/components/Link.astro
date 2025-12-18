@@ -1,10 +1,33 @@
 ---
+import { Icon } from "astro-icon/components"
+
 interface Props {
     url: string
     text: string
+    icon?: {
+        name: string,
+        side: "left" | "right"
+    },
+    class?: string
+    [key: string]: any
 }
 
-const { url, text } = Astro.props
+const { url, text, icon, class: extra, ...rest } = Astro.props
+
+const classes = `inline-flex items-center gap-2 text-primary transition-all hover:gap-3 ${extra ?? ""}`
 ---
 
-<a href={url} class="underline decoration-dotted decoration-primary decoration-2 text-primary">{text}</a>
+<a
+    href={ url }
+    rel="noopener noreferrer"
+    class={ classes }
+    {...rest}
+>
+    { icon && icon.side === 'left' && (
+        <Icon name={ `tabler:${icon.name}` } />
+    ) }
+    { text }
+    { icon && icon.side === 'right' && (
+        <Icon name={ `tabler:${icon.name}` } />
+    ) }
+</a>

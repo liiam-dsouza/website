@@ -1,0 +1,46 @@
+---
+import Link from "./Link.astro"
+import Badge from "./Badge.astro"
+
+const resources = [
+    {
+        id: 1,
+        title: "Shaping Tomorrow's Intelligence",
+        description: "A showcase of what's currently possible with AI tools like Docker MCP and n8n, and what the development of AI might look like in the near future.",
+        type: "Presentation",
+        date: "01/11/25",
+        link: "https://github.com/liiam-dsouza/shaping-tomorrows-intelligence",
+        linkText: "GitHub Repo",
+    },
+]
+---
+
+<section id="resources" class="border-t border-neutral-300 mt-8 pt-8">
+    <h2 class="mb-8 text-3xl font-medium">📂 Resources</h2>
+    <div class="mx-auto max-w-6xl">
+        <div class="space-y-6">
+            {
+                resources.sort((a, b) => a.title.localeCompare(b.title)).map((resource) => (
+                    <div class="rounded-lg border border-neutral-300 border-border p-6 transition-colors hover:border-primary cursor-pointer">
+                        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                            <div class="flex-1">
+                                <h3 class="mb-1 text-lg font-semibold">{ resource.title }</h3>
+                                <p class="mb-2 text-sm text-muted-foreground">
+                                    { resource.description }
+                                </p>
+                                <div class="flex items-center gap-2 text-xs text-muted-foreground">
+                                    <span>{ resource.date }</span>
+                                    <Badge text={ resource.type } />
+                                </div>
+                            </div>
+
+                            { resource.link && (
+                                <Link url={ resource.link } text={ resource.linkText } icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" />
+                            )}
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>

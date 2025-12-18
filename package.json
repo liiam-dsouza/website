@@ -9,8 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@iconify-json/tabler": "^1.2.23",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.15.7",
+    "astro-icon": "^1.1.5",
     "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19"
   }
 }

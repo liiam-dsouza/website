@@ -1,0 +1,101 @@
+---
+import Tag from "./Tag.astro"
+import Link from "./Link.astro"
+import Experience from "./Experience.astro"
+
+import { SOCIAL_LINKS } from "../consts"
+
+const skills = [
+    "Public Speaking",
+    "Workshop Facilitation",
+    "Project Management",
+    "Event Coordination",
+    "Leadership",
+]
+
+const technical_skills = [
+    "Python",
+    "TypeScript",
+    "HTML & CSS",
+    "Astro",
+    "Git & GitHub",
+    "Visual Studio Code",
+    "Node.js",
+    "Docker",
+    "Bash Scripting",
+    "Lua",
+]
+---
+
+<section id="about" class="border-t border-neutral-300 mt-8 pt-8">
+    <h2 class="mb-8 text-3xl font-medium">ℹ️ About Me</h2>
+    <div class="mx-auto max-w-6xl">
+        <div class="grid gap-12 md:grid-cols-2">
+            <div class="space-y-6 text-sm leading-relaxed">
+                <p>
+                    I'm passionate about technology, innovation, and STEM,
+                    and I love solving complex problems. Through a mix of
+                    tech-focussed and educational roles, I've developed strong
+                    communication skills and a people-first approach to my work.
+                </p>
+                <p>
+                    Empathy and collaboration are big parts of how I operate, whether I'm
+                    contributing to a team or taking lead, I focus on building meaningful
+                    relationships and delivering high-quality results. I'm adaptable,
+                    comfortable under pressure and always keen to learn something new.
+                </p>
+                <p>
+                    I've contributed to projects that create real value for the
+                    communities and organisation's I'm a part of, and I've been
+                    recognised with awards for teamwork, critical thinking and innovation.
+                </p>
+                <p>
+                    As I near the end of my degree, I'm excited to work with emerging
+                    technologies and use them to make a positive impact for everyone.
+                </p>
+            </div>
+
+            <div class="space-y-6 text-sm leading-relaxed">
+                <div>
+                    <h3 class="mb-2 font-semibold">Expertise</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {
+                            skills.sort().map((skill) => (
+                                <Tag text={ skill } />
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="mb-2 font-semibold">Technical Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        {
+                            technical_skills.sort().map((skill) => (
+                                <Tag text={ skill } />
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="mb-2 font-semibold">Connect</h3>
+                    <div class="space-y-1 text-sm text-muted-foreground">
+                        {
+                            SOCIAL_LINKS.sort((a, b) => a.name.localeCompare(b.name)).map((link) => (
+                                link.name !== "GitHub" ? (
+                                    <p>
+                                        { link.name }:{" "}
+                                        <Link url={ link.url } text={ link.text } class="underline" />
+                                    </p>
+                                ) : null
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <Experience />
+    </div>
+</section>

@@ -1,33 +1,16 @@
 ---
 import Main from "../layouts/Main.astro"
-import Link from "../components/Link.astro"
+import Projects from "../components/Projects.astro"
+import Resources from "../components/Resources.astro"
+import About from "../components/About.astro"
+import Experience from "../components/Experience.astro"
+import Posts from "../components/Posts.astro"
 ---
 
 <Main title="Home" description="Welcome to the home page!">
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-		<div>
-			<img src="thumbnails/custom-terminal.png" alt="Custom Terminal" class="hover:opacity-75 hover:cursor-pointer">
-
-			<p>
-				My customised installation of <Link url="ghostty.org" text="Ghostty" /> terminal. Contains some useful plugins using <Link url="https://github.com/zdharma-continuum/zinit" text="Zinit" /> and configs for other CLI tools.
-			</p>
-		</div>
-
-		<div>
-			<img src="thumbnails/doc-conv.png" alt="Custom Terminal" class="hover:opacity-75 hover:cursor-pointer">
-
-			<p>
-				A markdown document converter CLI tool built using <Link url="https://pandoc.org/" text="Pandoc" />. Converts markdown to various formats including PDF, DOCX.
-			</p>
-		</div>
-
-        <div>
-			<img src="thumbnails/artificial-intelligence.png" alt="Custom Terminal" class="hover:opacity-75 hover:cursor-pointer">
-
-			<p>
-				Accompanying workshop material for my talk, "Shaping Tomorrow's Intelligence" which I presented at <Link url="https://globalai.community/chapters/brisbane/events/agentcon-brisbane/" text="Agentcon Brisbane 2025" />.
-			</p>
-		</div>
-	</div>
+    <Projects />
+    <Resources />
+    <About />
+    <Posts />
 </Main>
 

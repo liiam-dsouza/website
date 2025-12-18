@@ -15,7 +15,7 @@ const { title, description } = Astro.props
 	<head>
 		<BaseHead title={title || "Liam D'Souza"} description={description || "Liam D'Souza's personal website"} />
 	</head>
-	<body class="md:px-48 p-4 md:p-0 min-h-screen flex flex-col items-center">
+	<body class="md:px-48 p-4 md:p-0 min-h-screen flex flex-col scroll-smooth">
         <Header />
         <main class="grow">
             <slot />

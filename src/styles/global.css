@@ -1,5 +1,18 @@
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
 @theme {
     --color-primary: #0000FF;
+    --font-primary: "Linotype Feltpen Regular", sans-serif;
+}
+
+@font-face {
+    font-family: "Linotype Feltpen Regular";
+    src: url("../fonts/LinotypeFeltpenRegular.otf") format("opentype");
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    scroll-behavior: smooth;
 }

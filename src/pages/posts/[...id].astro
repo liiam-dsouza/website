@@ -1,0 +1,24 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content"
+
+import MarkdownWrapper from "../../layouts/MarkdownWrapper.astro"
+
+export async function getStaticPaths() {
+    const posts = await getCollection("posts")
+    return posts.map((post) => ({
+        params: { id: post.id },
+        props: { post },
+    }))
+}
+
+type Props = {
+    post: CollectionEntry<"posts">
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+---
+
+<MarkdownWrapper frontmatter={ post.data }>
+    <Content />
+</MarkdownWrapper>

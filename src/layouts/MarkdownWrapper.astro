@@ -1,0 +1,36 @@
+---
+import Main from "../layouts/Main.astro"
+import Tag from "../components/Tag.astro"
+
+interface Props {
+    frontmatter: {
+        title: string;
+        date: Date;
+        description?: string | undefined;
+        cover?: {
+            src: string;
+            width: number;
+            height: number;
+            format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+        } | undefined;
+        coverAlt?: string | undefined;
+        tags?: string[] | undefined;
+    }
+}
+
+const { frontmatter } = Astro.props as Props
+---
+
+<Main title={ frontmatter.title } description={ frontmatter.description }>
+    <article>
+        <div class="prose max-w-3/4 mx-auto">
+            <h2 class="mb-8 text-3xl font-medium mx-auto">{ frontmatter.title }</h2>
+            <div class="mb-4 flex flex-wrap gap-2">
+                { frontmatter.tags && ( frontmatter.tags.sort().map((tag) => (
+                    <Tag text={ tag } />
+                ))) }
+            </div>
+            <slot />
+        </div>
+    </article>
+</Main>

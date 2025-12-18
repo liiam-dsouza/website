@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content"
+import Link from "./Link.astro"
+import Badge from "./Badge.astro"
+
+type Props = {
+    post: CollectionEntry<"posts">
+}
+
+const { post } = Astro.props
+const { cover, coverAlt, title, description, date } = post.data
+
+const readingTime = post.body ? Math.ceil(post.body.split(" ").length / 200) : 1
+---
+
+<article>
+    <div class="rounded-lg border border-neutral-300 border-border p-6 transition-colors hover:border-primary cursor-pointer">
+        <h3 class="mb-1 text-lg font-semibold">{ title }</h3>
+        <div class="flex flex-row items-center gap-2">
+            <time datetime={ date.toISOString() } class="text-sm">
+                {
+                    date.toLocaleDateString(undefined, {
+                        dateStyle: "medium",
+                        timeZone: "UTC",
+                    })
+                }
+            </time>
+
+            <Badge text={ `${ readingTime } min read` } />
+        </div>
+        <p class="my-2 text-md text-muted-foreground">{ description }</p>
+
+        <Link url={`/posts/${ post.id }`} text="Read Post" icon={{ name: "arrow-big-right-lines", side: "right"   }}  />
+    </div>
+</article>

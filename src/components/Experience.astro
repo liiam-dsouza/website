@@ -1,0 +1,117 @@
+---
+import Tag from "./Tag.astro"
+import Badge from "./Badge.astro"
+
+interface Experience {
+    role: string
+    company: string
+    startDate: string
+    endDate: string | null
+    description: string
+    skills: string[]
+}
+
+const experience: Experience[] = [
+  {
+        role: "Student Ambassador",
+        company: "Queensland Universiy of Technology",
+        startDate: "2025-06-01",
+        endDate: null,
+        description: "Delivered hands-on STEM outreach for local high schools, introducing students to QUT engineering degrees and study pathways.",
+        skills: ["Public Speaking", "Teamwork", "Leadership", "Cross-team Collaboration"],
+    },
+    {
+        role: "General Executive",
+        company: "Code Network",
+        startDate: "2023-10-01",
+        endDate: "2025-05-30",
+        description: "Contributed to the delivery of student-led tech events that brought students and software and IT professionals together.",
+        skills: ["Teamwork", "Event Coordination", "Cross-team Collaboration", "Leadership", "Social Media Markeing"],
+    }
+]
+
+function formatDuration(start: Date, end: Date) {
+    let months =
+        (end.getFullYear() - start.getFullYear()) * 12 +
+        (end.getMonth() - start.getMonth()) + 1
+
+    const years = Math.floor(months / 12)
+    months = months % 12
+
+    const parts: string[] = []
+
+    if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`)
+    if (months > 0) parts.push(`${months} mo${months > 1 ? "s" : ""}`)
+
+    return parts.join(" ")
+}
+
+const now = new Date()
+
+const sortedExperience = [...experience]
+    .map(item => {
+        const start = new Date(item.startDate)
+        const end = item.endDate ? new Date(item.endDate) : now
+
+        return {
+            ...item,
+            start,
+            end,
+            isCurrent: item.endDate === null,
+        }
+    })
+    .sort((a, b) => b.end.getTime() - a.end.getTime())
+
+---
+
+<section id="experience">
+    <h3 class="my-4 text-2xl font-medium">💼 Experience</h2>
+    <div class="mx-auto max-w-6xl">
+        <div class="space-y-6">
+            {
+                sortedExperience.map((item) => (
+                    <div class="rounded-lg border border-neutral-300 border-border p-4 transition-colors hover:border-primary cursor-pointer">
+                        <div class="flex flex-col">
+                            <div>
+                                <h3 class="text-lg font-semibold">{ item.role }</h3>
+                                <span class="text-sm">{ item.company }</span>
+                                <div class="flex items-center gap-2 my-2 text-xs text-muted-foreground">
+                                    <span>
+                                        {
+                                            new Date(item.startDate).toLocaleDateString(undefined, {
+                                                month: "short",
+                                                year: "numeric",
+                                                timeZone: "UTC",
+                                            })
+                                        }
+                                        -
+                                        {
+                                            item.endDate
+                                                ? new Date(item.endDate).toLocaleDateString(undefined, {
+                                                    month: "short",
+                                                    year: "numeric",
+                                                    timeZone: "UTC",
+                                                })
+                                                : "Present"
+                                        }
+                                    </span>
+
+                                    <Badge text={ formatDuration(item.start, item.end) } />
+                                </div>
+                                <p class="mb-2 text-sm text-muted-foreground">
+                                    { item.description }
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    { item.skills.sort().map((skill) => (
+                                        <Tag text={ skill } />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
