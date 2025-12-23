@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "title": "Custom Ghostty Terminal",
+        "status": "In Development",
+        "description": "My customised install of Ghostty terminal. Contains some useful plugins using Zinit and configs for other CLI tools.",
+        "tags": ["Zsh", "Zinit", "Shell Scripting", "Ghostty"],
+        "link": "#"
+    },
+    {
+        "id": 2,
+        "title": "Doc Conv",
+        "status": "In Development",
+        "description": "A markdown document converter CLI tool built using Pandoc. Converts markdown to various formats including PDF, DOCX.",
+        "tags": ["Pandoc", "Shell Scripting", "CLI"],
+        "link": "https://github.com/liiam-dsouza/doc-conv"
+    },
+    {
+        "id": 3,
+        "title": "Pawpedia",
+        "status": "Completed",
+        "description": "A pet tracking and care app built as part of a group for the unit CAB302 - Agile Software Engineering at QUT.",
+        "tags": ["Java", "Maven", "JUnit", "JavaFX", "CI/CD"],
+        "link": "https://github.com/liiam-dsouza/PawPedia"
+    },
+    {
+        "id": 3,
+        "title": "Visual Studio Code Config",
+        "status": "Completed",
+        "description": "A curated set of extensions, UI tweaks and settings for Visual Studio Code to enhance productivity and coding experience.",
+        "tags": ["VSCode", "Extensions", "Settings", "Custom UI"],
+        "link": "#"
+    },
+    {
+        "id": 4,
+        "title": "Neovim Config",
+        "status": "In Development",
+        "description": "A highly customised Neovim configuration with various plugins and settings for an optimal coding experience.",
+        "tags": ["Neovim", "Lua", "Vimscript", "Lazyvim", "Plugins"],
+        "link": "#"
+    }
+]

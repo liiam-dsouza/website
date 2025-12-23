@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from "astro:content"
+
+import Link from "./Link.astro"
+
+interface Props {
+  previousPost?: CollectionEntry<"posts"> | null
+  nextPost?: CollectionEntry<"posts"> | null
+}
+
+const { previousPost, nextPost } = Astro.props as Props
+---
+
+<nav class="mt-16 flex justify-between gap-6 text-sm">
+  { previousPost ? (
+    <div class="flex flex-col items-start">
+        <Link url={ `/posts/${ previousPost.id }` } text="Previous" icon={{ name: "arrow-big-left-lines", side: "left" }} />
+        <span class="text-neutral-500">{ previousPost.data.title }</span>
+    </div>
+  ) : <span /> }
+
+  { nextPost ? (
+    <div class="flex flex-col items-end">
+        <Link url={ `/posts/${ nextPost.id }` } text="Next" icon={{ name: "arrow-big-right-lines", side: "right" }} />
+        <span class="text-neutral-500">{ nextPost.data.title }</span>
+    </div>
+  ) : null }
+</nav>

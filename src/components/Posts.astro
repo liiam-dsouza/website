@@ -9,7 +9,7 @@ const posts = (await getCollection("posts")).sort(
 
 <section id="posts" class="border-t border-neutral-300 mt-8 pt-8">
     <h2 class="mb-8 text-3xl font-medium">✏️ Writeups</h2>
-    <div class="mx-auto max-w-6xl">
+    <div class="mx-auto">
         <div class="grid gap-8 md:grid-cols-2">
             {
                 posts.map((p) => (

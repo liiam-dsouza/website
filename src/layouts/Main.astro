@@ -13,9 +13,9 @@ const { title, description } = Astro.props
 
 <html lang="en">
 	<head>
-		<BaseHead title={title || "Liam D'Souza"} description={description || "Liam D'Souza's personal website"} />
+		<BaseHead title={ title || "Liam D'Souza" } description={ description || "View my website that showcases my projects, resources, and writeups." } />
 	</head>
-	<body class="md:px-48 p-4 md:p-0 min-h-screen flex flex-col scroll-smooth">
+	<body class="p-8 min-h-screen flex flex-col scroll-smooth max-w-7xl mx-auto">
         <Header />
         <main class="grow">
             <slot />

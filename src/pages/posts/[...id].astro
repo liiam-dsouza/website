@@ -1,24 +1,37 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content"
 
-import MarkdownWrapper from "../../layouts/MarkdownWrapper.astro"
+import PostWrapper from "../../layouts/PostWrapper.astro"
 
 export async function getStaticPaths() {
     const posts = await getCollection("posts")
-    return posts.map((post) => ({
+
+    const sortedPosts = posts.sort(
+        (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+    )
+
+    console.log(sortedPosts.map(p => p.id))
+
+    return sortedPosts.map((post, index) => ({
         params: { id: post.id },
-        props: { post },
+        props: {
+            post,
+            previousPost: sortedPosts[index - 1] ?? null, // newer post
+            nextPost: sortedPosts[index + 1] ?? null,     // older post
+        },
     }))
 }
 
 type Props = {
     post: CollectionEntry<"posts">
+    previousPost: CollectionEntry<"posts"> | null
+    nextPost: CollectionEntry<"posts"> | null
 }
 
-const { post } = Astro.props
+const { post, previousPost, nextPost } = Astro.props
 const { Content } = await render(post)
 ---
 
-<MarkdownWrapper frontmatter={ post.data }>
+<PostWrapper frontmatter={ post.data } previousPost={ previousPost } nextPost={ nextPost } post={ post }>
     <Content />
-</MarkdownWrapper>
+</PostWrapper>

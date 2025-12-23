@@ -17,7 +17,7 @@ const resources = [
 
 <section id="resources" class="border-t border-neutral-300 mt-8 pt-8">
     <h2 class="mb-8 text-3xl font-medium">📂 Resources</h2>
-    <div class="mx-auto max-w-6xl">
+    <div class="mx-auto">
         <div class="space-y-6">
             {
                 resources.sort((a, b) => a.title.localeCompare(b.title)).map((resource) => (
@@ -35,7 +35,7 @@ const resources = [
                             </div>
 
                             { resource.link && (
-                                <Link url={ resource.link } text={ resource.linkText } icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" />
+                                <Link url={ resource.link } text={ resource.linkText } icon={{ name: "arrow-big-right-lines", side: "right" }} target="_blank" />
                             )}
                         </div>
                     </div>

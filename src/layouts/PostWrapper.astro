@@ -1,0 +1,79 @@
+---
+import { getCollection, type CollectionEntry, type ReferenceDataEntry } from "astro:content"
+import { readingTime } from "../utils/helpers"
+
+import Main from "../layouts/Main.astro"
+import Link from "../components/Link.astro"
+import Tag from "../components/Tag.astro"
+import PostNavigation from "../components/PostNavigation.astro"
+
+interface Props {
+    frontmatter: {
+        title: string;
+        date: Date;
+        description?: string | undefined;
+        cover?: {
+            src: string;
+            width: number;
+            height: number;
+            format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+        } | undefined;
+        coverAlt?: string | undefined;
+        tags?: string[] | undefined;
+    }
+
+    previousPost?: CollectionEntry<"posts"> | null
+    nextPost?: CollectionEntry<"posts"> | null
+    post: CollectionEntry<"posts">
+}
+
+const { frontmatter, previousPost, nextPost, post } = Astro.props as Props
+
+const allTags = await getCollection("tags")
+
+const tagData =  frontmatter.tags ? allTags.filter((tag) => frontmatter.tags!.includes(tag.id)) : []
+---
+
+<Main title={ frontmatter.title } description={ frontmatter.description }>
+    <article>
+        <div class="mx-auto">
+            <div class="flex flex-col gap-y-2 my-8 max-w-full mx-auto px-2">
+                <Link url="/#posts" text="Back" icon={{ name: "arrow-big-left-lines", side: "left" }} />
+                <h2 class="text-black text-3xl font-medium mt-4">{ frontmatter.title }</h2>
+                <div class="flex flex-row gap-x-2 items-center">
+                    <div class="flex flex-row gap-x-1 items-center">
+                        <span>📅</span>
+                        <time datetime={ frontmatter.date.toISOString() } class="text-sm">
+                            {
+                                frontmatter.date.toLocaleDateString(undefined, {
+                                    dateStyle: "medium",
+                                    timeZone: "UTC",
+                                })
+                            }
+                        </time>
+                    </div>
+                    <span>•</span>
+                    <span class="text-sm">⏰ { `${ readingTime(post.body) } min read` }</span>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    { tagData.length > 0 &&
+                        tagData
+                        .slice()
+                        .sort((a, b) => a.data.name.localeCompare(b.data.name))
+                        .map((tag) => (
+                        <Tag text={ `${tag.data.emoji} ${tag.data.name}` } />
+                    ))}
+                </div>
+            </div>
+            <div class="prose max-w-full mx-auto px-2">
+                <slot />
+            </div>
+
+            <PostNavigation
+                previousPost={previousPost}
+                nextPost={nextPost}
+            />
+        </div>
+    </article>
+</Main>

@@ -1,0 +1,27 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content"
+
+import ProjectWrapper from "../../layouts/ProjectWrapper.astro"
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects")
+
+    return projects.map((project, index) => ({
+        params: { id: project.id },
+        props: {
+            project,
+        },
+    }))
+}
+
+type Props = {
+    project: CollectionEntry<"projects">
+}
+
+const { project } = Astro.props
+const { Content } = await render(project)
+---
+
+<ProjectWrapper frontmatter={ project.data } project={ project }>
+    <Content />
+</ProjectWrapper>

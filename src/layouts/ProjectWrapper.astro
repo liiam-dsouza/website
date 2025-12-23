@@ -1,0 +1,56 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+
+import Main from "../layouts/Main.astro"
+import Link from "../components/Link.astro"
+import Tag from "../components/Tag.astro"
+
+interface Props {
+    frontmatter: {
+        title: string
+        description?: string | undefined
+        status: string
+        cover?: {
+            src: string
+            width: number
+            height: number
+            format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
+        } | undefined
+        coverAlt?: string | undefined
+        technologies?: string[] | undefined
+        categories?: string[] | undefined
+    }
+
+    project: CollectionEntry<"projects">
+}
+
+const { frontmatter, project } = Astro.props as Props
+
+const allTags = await getCollection("tags")
+
+const tagData =  frontmatter.technologies ? allTags.filter((tag) => frontmatter.technologies!.includes(tag.id)) : []
+---
+
+<Main title={ frontmatter.title } description={ frontmatter.description }>
+    <article>
+        <div class="mx-auto">
+            <div class="flex flex-col gap-y-2 my-8 md:max-w-5/6 max-w-full mx-auto px-2">
+                <Link url="/#projects" text="Back" icon={{ name: "arrow-big-left-lines", side: "left" }} />
+                <h2 class="text-black text-3xl font-medium mt-4">{ frontmatter.title }</h2>
+
+                <div class="flex flex-wrap gap-2">
+                    { tagData.length > 0 &&
+                        tagData
+                        .slice()
+                        .sort((a, b) => a.data.name.localeCompare(b.data.name))
+                        .map((tag) => (
+                        <Tag text={ `${tag.data.emoji} ${tag.data.name}` } />
+                    ))}
+                </div>
+            </div>
+            <div class="prose md:max-w-5/6 max-w-full mx-auto px-2">
+                <slot />
+            </div>
+        </div>
+    </article>
+</Main>

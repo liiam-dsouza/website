@@ -1,0 +1,16 @@
+---
+import Main from "../layouts/Main.astro"
+import LottieAnimation from "astro-integration-lottie/Lottie.astro"
+---
+
+<Main title="404 Not Found" description="View my website that showcases my projects, resources, and writeups.">
+    <div class="flex flex-col items-center justify-center">
+        <div class="container inline-flex justify-center">
+            <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js" type="module"></script>
+            <dotlottie-wc src="https://lottie.host/db84d26f-05ca-4702-bd8e-6af23cf4f63e/gA39AckPS5.lottie" class="min-w-xs" autoplay loop></dotlottie-wc>
+        </div>
+        <h1 class="text-4xl font-bold mt-4">404 - Page Not Found</h1>
+        <p class="mt-2 text-center max-w-lg">Oops! The page you're looking for doesn't exist. It might have been moved or deleted.</p>
+    </div>
+</Main>
+
