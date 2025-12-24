@@ -1,12 +1,12 @@
-[
-    {
-        "role": "Emerging Professionals Committee Member",
-        "company": "Australian Computer Society",
-        "startDate": "2026-01-01",
-        "endDate": null,
-        "description": "Delivered hands-on STEM outreach for local high schools, introducing students to QUT engineering degrees and study pathways.",
-        "skills": ["public-speaking", "leadership", "event-coordination"]
-    },
+export const experienceJson = [
+    // {
+    //     "role": "Emerging Professionals Committee Member",
+    //     "company": "Australian Computer Society",
+    //     "startDate": "2026-01-01",
+    //     "endDate": null,
+    //     "description": "Delivered hands-on STEM outreach for local high schools, introducing students to QUT engineering degrees and study pathways.",
+    //     "skills": ["public-speaking", "leadership", "event-coordination"]
+    // },
     {
         "role": "Student Ambassador",
         "company": "Queensland Universiy of Technology",

@@ -10,4 +10,62 @@ year: 2024
 import Figure from "../../components/Figure.astro"
 import PullQuote from "../../components/PullQuote.astro"
 
-Information about pawpedia
+PawPedia is a desktop pet management application that provides pet owners with a centralised platform to manage their pets' information and schedule important reminders.  Built with JavaFX, the application offers an intuitive interface for tracking multiple pets, organising pet-related tasks, and never missing important appointments or activities.
+
+## Project Context
+
+This project was developed for the unit CAB302 (Agile Software Engineering) at QUT. This project aimed to demonstrate an understanding of the following concepts:
+- Object-oriented programming principles
+- MVC architectural pattern
+- Database integration
+- GUI development with JavaFX
+- Software testing practices
+- Version control with Git
+
+## Key Features
+
+### 🔐 User Authentication
+- Secure user registration with validation (username uniqueness, password strength requirements)
+- Login system with credential verification
+- Persistent user sessions throughout the application
+
+### 🐾 Pet Management
+- Create and manage detailed profiles for cats and dogs
+- Track pet information including name, breed, date of birth, and custom images
+- Support for multiple pets per user account
+- Full CRUD operations (create, read, update, delete) for pet records
+
+### ⏰ Reminder System
+- Schedule reminders with custom titles, descriptions, and times
+- Set date ranges with start and end dates
+- Configure repeating reminders (Daily, Monthly, or Never)
+- Associate reminders with specific pets
+- View and manage all reminders in an organized list
+
+### 🏠 Dashboard
+- Centralized home screen displaying all pets and upcoming reminders
+- Quick navigation to pet profiles and reminder management
+- Clean, user-friendly interface for efficient pet management
+
+---
+
+## Technology Stack
+
+**Frontend:**
+- **JavaFX 21** - Modern desktop UI framework
+- **FXML** - Declarative UI markup
+- **CSS** - Custom styling
+
+**Backend:**
+- **Java 17** - Core application logic
+- **SQLite** - Local database for data persistence
+- **JDBC** - Database connectivity
+
+**Architecture:**
+- **MVC Pattern** - Model-View-Controller architecture
+- **DAO Pattern** - Data Access Object for database operations
+- **Singleton Pattern** - Database connection management
+
+**Build & Testing:**
+- **Maven** - Project management and dependency resolution
+- **JUnit 5.10.0** - Unit testing framework
