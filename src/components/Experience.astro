@@ -4,7 +4,7 @@ import { getCollection } from "astro:content"
 import Tag from "./Tag.astro"
 import Badge from "./Badge.astro"
 
-const experience = (await getCollection("experience"))
+const experience = await getCollection("experience")
 
 const allTags = await getCollection("tags")
 
