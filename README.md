@@ -8,9 +8,9 @@ A modern, fast personal website showcasing my work and projects.
 
 ## Tech Stack
 
-- **Astro** - Static site generator
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Styling
+- **[Astro](https://astro.build/)** - Static site generator
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
+- **[Tailwind CSS](https://tailwindcss.com/)** - Styling
 
 ## Getting Started
 

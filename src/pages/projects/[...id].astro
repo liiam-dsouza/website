@@ -22,6 +22,6 @@ const { project } = Astro.props
 const { Content } = await render(project)
 ---
 
-<ProjectWrapper frontmatter={ project.data } project={ project }>
+<ProjectWrapper frontmatter={ project.data }>
     <Content />
 </ProjectWrapper>

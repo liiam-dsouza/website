@@ -3,7 +3,7 @@ import { glob } from "astro/loaders"
 import { z } from "astro/zod"
 
 import tagsJson from "./content/tags.json"
-import experienceJson from "./content/experience.json"
+import { experienceJson } from "./content/experience"
 
 const posts = defineCollection({
     loader: glob({
@@ -67,7 +67,7 @@ const projects = defineCollection({
         title: z.string(),
         status: z.enum(["In Development", "Completed"]),
         description: z.string().optional(),
-        link: z.string().url().optional(),
+        link: z.string().url(),
         technologies: z.array(z.string()).optional(),
         categories: z.array(z.string()).optional(),
         year: z.number()
