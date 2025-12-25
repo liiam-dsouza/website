@@ -16,7 +16,7 @@ const navLinks = [
         Educate and inspire with the power of technology
     </p>
 
-    <div class="grid md:grid-rows-1 md:grid-cols-5 grid-cols-2 gap-y-4 gap-x-8 m-4">
+    <div class="grid md:grid-rows-1 md:grid-cols-4 grid-cols-2 gap-y-4 gap-x-8 m-4">
         {
             navLinks.map((link) => (
                 <Link url={ link.url } text={ link.text } icon={{ name: `${ link.icon }`, side: "left" }} />
