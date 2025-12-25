@@ -3,6 +3,8 @@ import { getCollection } from "astro:content"
 
 import Tag from "./Tag.astro"
 import Link from "./Link.astro"
+import Card from "./Card.astro"
+import Heading from "./Heading.astro"
 
 const projects = await getCollection("projects")
 
@@ -10,7 +12,7 @@ const allTags = await getCollection("tags")
 ---
 
 <section id="projects">
-    <h2 class="mb-8 text-3xl font-medium">🔧 Projects</h2>
+    <Heading size="large">🔧 Projects</Heading>
     <div class="mx-auto">
         <div class="grid gap-8 md:grid-cols-2">
             {
@@ -18,7 +20,7 @@ const allTags = await getCollection("tags")
                     const tagData =  project.data.categories ? allTags.filter((tag) => project.data.categories!.includes(tag.id)) : []
 
                     return (
-                        <div class="group rounded-lg border border-neutral-300 p-6 transition-colors hover:border-primary">
+                        <Card>
                             <div class="mb-4 flex flex-col gap-y-2">
                                 <div class="flex justify-between items-center border-b border-neutral-200 p-2">
                                     <div class="flex flex-wrap gap-2">
@@ -41,7 +43,7 @@ const allTags = await getCollection("tags")
                             </div>
 
                             <Link url={ `/projects/${ project.id }` } text="View Project" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" />
-                        </div>
+                        </Card>
                     )
                 })
             }

@@ -1,6 +1,8 @@
 ---
 import Link from "./Link.astro"
 import Badge from "./Badge.astro"
+import Card from "./Card.astro"
+import Section from "./Section.astro"
 
 const resources = [
     {
@@ -15,13 +17,13 @@ const resources = [
 ]
 ---
 
-<section id="resources" class="border-t border-neutral-300 mt-8 pt-8">
-    <h2 class="mb-8 text-3xl font-medium">📂 Resources</h2>
+<Section id="resources" border="top">
+    <h2 class="my-4 text-3xl font-medium">📂 Resources</h2>
     <div class="mx-auto">
         <div class="space-y-6">
             {
                 resources.sort((a, b) => a.title.localeCompare(b.title)).map((resource) => (
-                    <div class="rounded-lg border border-neutral-300 border-border p-6 transition-colors hover:border-primary cursor-pointer">
+                    <Card>
                         <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                             <div class="flex-1">
                                 <h3 class="mb-1 text-lg font-semibold">{ resource.title }</h3>
@@ -38,9 +40,9 @@ const resources = [
                                 <Link url={ resource.link } text={ resource.linkText } icon={{ name: "arrow-big-right-lines", side: "right" }} target="_blank" />
                             )}
                         </div>
-                    </div>
+                    </Card>
                 ))
             }
         </div>
     </div>
-</section>
+</Section>

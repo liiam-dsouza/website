@@ -3,6 +3,7 @@ import Link from "./Link.astro"
 
 const navLinks = [
     { url: "/#projects", text: "Projects", icon: "tool" },
+    { url: "/chats", text: "Chats", icon: "microphone" },
     { url: "/#resources", text: "Resources", icon: "folder" },
     { url: "/#about", text: "About Me", icon: "info-circle" },
     { url: "/#posts", text: "Writeups", icon: "pencil" },
@@ -15,7 +16,7 @@ const navLinks = [
         Educate and inspire with the power of technology
     </p>
 
-    <div class="grid md:grid-rows-1 md:grid-cols-4 grid-cols-2 gap-y-4 gap-x-8 m-4">
+    <div class="grid md:grid-rows-1 md:grid-cols-5 grid-cols-2 gap-y-4 gap-x-8 m-4">
         {
             navLinks.map((link) => (
                 <Link url={ link.url } text={ link.text } icon={{ name: `${ link.icon }`, side: "left" }} />

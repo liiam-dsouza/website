@@ -1,0 +1,14 @@
+---
+interface Props {
+    size: "small" | "large"
+    children: any
+}
+
+const { size } = Astro.props
+
+const sizeClass = size === "large" ? "text-3xl" : "text-2xl"
+---
+
+<h2 class={ `my-4 font-medium ${ sizeClass }` }>
+    <slot />
+</h2>

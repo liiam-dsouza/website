@@ -2,6 +2,8 @@
 import Tag from "./Tag.astro"
 import Link from "./Link.astro"
 import Experience from "./Experience.astro"
+import Heading from "./Heading.astro"
+import Section from "./Section.astro"
 
 import { SOCIAL_LINKS } from "../consts"
 
@@ -27,11 +29,11 @@ const technical_skills = [
 ]
 ---
 
-<section id="about" class="border-t border-neutral-300 mt-8 pt-8">
-    <h2 class="mb-8 text-3xl font-medium">ℹ️ About Me</h2>
+<Section id="about" border="top">
+    <Heading size="large">ℹ️ About Me</Heading>
     <div class="mx-auto">
         <div class="grid gap-12 md:grid-cols-2">
-            <div class="space-y-6 text-sm leading-relaxed">
+            <div class="space-y-6 leading-relaxed">
                 <p>
                     I'm passionate about technology, innovation, and STEM,
                     and I love solving complex problems. Through a mix of
@@ -98,4 +100,4 @@ const technical_skills = [
 
         <Experience />
     </div>
-</section>
+</Section>
