@@ -3,6 +3,9 @@ import { getCollection } from "astro:content"
 
 import Tag from "./Tag.astro"
 import Badge from "./Badge.astro"
+import Card from "./Card.astro"
+import Heading from "./Heading.astro"
+import Section from "./Section.astro"
 
 const experience = await getCollection("experience")
 
@@ -25,8 +28,8 @@ function formatDuration(start: Date, end: Date) {
 }
 ---
 
-<section id="experience">
-    <h3 class="my-4 text-2xl font-medium">💼 Experience</h2>
+<Section id="experience" inline>
+    <Heading size="small">💼 Experience</Heading>
     <div class="mx-auto">
         <div class="space-y-6">
             {
@@ -36,7 +39,7 @@ function formatDuration(start: Date, end: Date) {
                     const tagData =  item.data.skills ? allTags.filter((tag) => item.data.skills.includes(tag.id)) : []
 
                     return (
-                        <div class="rounded-lg border border-neutral-300 border-border p-4 transition-colors hover:border-primary cursor-pointer">
+                        <Card>
                             <div class="flex flex-col">
                                 <div>
                                     <h3 class="text-lg font-semibold">{ item.data.role }</h3>
@@ -73,11 +76,11 @@ function formatDuration(start: Date, end: Date) {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </Card>
                     )
                 })
             }
         </div>
     </div>
-</section>
+</Section>
 

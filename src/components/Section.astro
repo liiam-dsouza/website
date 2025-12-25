@@ -1,0 +1,27 @@
+---
+interface Props {
+    id: string
+    border?: "top" | "bottom"
+    inline?: boolean
+    children: any
+}
+
+const { id, border, inline } = Astro.props
+
+const classes = "border-neutral-300"
+
+const marginClass = inline ? "pt-2" : "mt-8 pt-4"
+
+const borderClass =
+  border === "top"
+    ? "border-t"
+    : border === "bottom"
+      ? "border-b"
+      : ""
+
+const className = `${marginClass} ${borderClass} ${classes}`
+---
+
+<section id={ id } class={ className }>
+    <slot />
+</section>
