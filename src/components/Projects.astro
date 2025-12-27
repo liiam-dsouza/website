@@ -1,14 +1,10 @@
 ---
 import { getCollection } from "astro:content"
 
-import Tag from "./Tag.astro"
-import Link from "./Link.astro"
-import Card from "./Card.astro"
 import Heading from "./Heading.astro"
+import ProjectCard from "./ProjectCard.astro"
 
 const projects = await getCollection("projects")
-
-const allTags = await getCollection("tags")
 ---
 
 <section id="projects">
@@ -17,33 +13,8 @@ const allTags = await getCollection("tags")
         <div class="grid gap-8 md:grid-cols-2">
             {
                 projects.sort((a, b) => a.data.title.localeCompare(b.data.title)).map((project) => {
-                    const tagData =  project.data.categories ? allTags.filter((tag) => project.data.categories!.includes(tag.id)) : []
-
                     return (
-                        <Card>
-                            <div class="mb-4 flex flex-col gap-y-2">
-                                <div class="flex justify-between items-center border-b border-neutral-200 p-2">
-                                    <div class="flex flex-wrap gap-2">
-                                        { tagData?.sort().map((tag) => (
-                                            <Tag text={ `${tag.data.emoji} ${tag.data.name}` } />
-                                        ))}
-                                    </div>
-
-                                    <span class="text-sm font-semibold">{ project.data.year }</span>
-                                </div>
-                                <h3 class="text-lg font-semibold">{ project.data.title }</h3>
-                                <span class="text-sm italic text-primary font-medium">[{ project.data.status }]</span>
-                                <p class="text-sm text-muted-foreground">{ project.data.description }</p>
-                            </div>
-
-                            <div class="mb-4 flex flex-wrap gap-2">
-                                { project.data.technologies?.sort().map((tag) => (
-                                    <Tag text={ tag } />
-                                ))}
-                            </div>
-
-                            <Link url={ `/projects/${ project.id }` } text="View Project" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" />
-                        </Card>
+                        <ProjectCard project={ project } />
                     )
                 })
             }

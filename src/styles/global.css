@@ -2,8 +2,9 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-    --color-primary: #0000FF;
+    --color-primary: #0000ff;
     --font-primary: "Linotype Feltpen Regular", sans-serif;
+    --color-scheme: light;
 }
 
 @font-face {
@@ -15,4 +16,10 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+@media (prefers-color-scheme: dark) {
+    *, ::before, ::after {
+        color-scheme: light ! important;
+    }
 }

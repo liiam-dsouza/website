@@ -14,6 +14,11 @@ export default defineConfig({
           tailwindcss()
       ],
   },
+  markdown: {
+        shikiConfig: {
+            theme: 'snazzy-light',
+        },
+  },
 
   integrations: [icon(), mdx(), lottie(), sitemap() ],
   site: "https://liamdsouza.com",

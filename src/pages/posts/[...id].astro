@@ -1,7 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content"
 
-import PostWrapper from "../../layouts/PostWrapper.astro"
+import PostWrapper from "@layouts/PostWrapper.astro"
 
 export async function getStaticPaths() {
     const posts = await getCollection("posts")

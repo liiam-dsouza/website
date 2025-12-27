@@ -1,0 +1,21 @@
+---
+interface Props {
+    start: Date
+    end: Date | null
+    current?: boolean
+}
+
+const { start, end, current } = Astro.props as Props
+
+const startYear = start.getUTCFullYear()
+const endYear = end ? end.getUTCFullYear() : null
+---
+
+{
+    startYear == endYear ? startYear : (
+        <>
+        {startYear} –{" "}
+        { !current && end ? endYear : "Present" }
+        </>
+    )
+}

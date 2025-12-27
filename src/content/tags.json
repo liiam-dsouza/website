@@ -15,5 +15,6 @@
     { "name": "Cross-team Collaboration", "emoji": "🔗" },
     { "name": "Social Media", "emoji": "📱" },
     { "name": "Terminal", "emoji": "⌨️" },
-    { "name": "University", "emoji": "🏛️" }
+    { "name": "University", "emoji": "🏛️" },
+    { "name": "Personal", "emoji": "👨‍💻" }
 ]
