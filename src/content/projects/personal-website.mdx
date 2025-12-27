@@ -1,0 +1,64 @@
+---
+title: Personal Website
+status: Completed
+description: A personal portfolio website showcasing projects and skills.
+technologies: ["Astro", "MDX", "Tailwind CSS", "TypeScript"]
+categories: [personal]
+link: https://github.com/liiam-dsouza/website
+startDate: 2025-12-12
+endDate: 2025-12-23
+---
+import Figure from "@components/Figure.astro"
+import PullQuote from "@components/PullQuote.astro"
+
+![Hero](/images/projects/personal-website/hero.png)
+
+A modern, performant personal portfolio website built with Astro's static site generation framework. The site serves as a central hub for my online presence, showcasing my work, projects, and professional experience with an emphasis on speed, accessibility, and clean design.
+
+Built with a content-first architecture, the website leverages MDX for rich, interactive content authoring and TypeScript for type-safe development, delivering near-instant page loads through static pre-rendering.
+
+## Project Context
+
+As a developer, having a strong online presence is essential for showcasing work and connecting with the community. I built this website to address several key goals:
+
+- **Portfolio Showcase**: A centralised platform to display projects, technical writeups, and professional accomplishments
+- **Performance-First**: Deliver an exceptional user experience with minimal JavaScript and optimal loading times
+- **Content Flexibility**: Enable rich content authoring that goes beyond basic markdown while maintaining simplicity
+- **Maintainability**: Create a sustainable codebase that's easy to update and extend over time
+
+I chose Astro as the foundation because of its unique approach to web development—shipping zero JavaScript by default and supporting multiple component frameworks.  This aligns perfectly with the goal of creating a fast, content-focused site without sacrificing modern development practices.
+
+The site is deployed using GitHub Pages with automated continuous deployment, ensuring updates are published instantly upon pushing to the main branch.
+
+## Key Features
+
+- **Static Site Generation:** Pre-rendered pages at build time for optimal performance and SEO, with near-instant page loads and minimal time-to-interactive.
+
+- **Content Collections:** Organised content management using Astro's content layer, making it easy to manage projects, blog posts, and other content types with type-safe frontmatter.
+
+- **MDX Support:** Rich content authoring that combines the simplicity of Markdown with the power of JSX components, enabling interactive elements within written content.
+
+- **Type-Safe Development:** Full TypeScript integration throughout the codebase for better developer experience, fewer runtime errors, and improved maintainability.
+
+- **Component-Driven Architecture:** Reusable Astro components for consistent UI patterns and streamlined development, following modern component-based design principles.
+
+- **Responsive Design:** Mobile-first approach using Tailwind CSS utility classes, ensuring the site looks great on all devices and screen sizes.
+
+- **Zero JavaScript by Default:** Astro's island architecture ensures minimal JavaScript is shipped to the client, only hydrating interactive components when necessary.
+
+## Tech Stack
+
+### Languages & Frameworks
+
+- **Core Framework:** [Astro](https://astro.build/) (70.2%) - Modern static site generator with partial hydration and excellent performance characteristics
+
+- **Content & Markup:** [MDX](https://mdxjs.com/) (18.1%) - Markdown with JSX support for enhanced content authoring with embedded components
+
+- **Development:** [TypeScript](https://www.typescriptlang.org/) (10%) - Type-safe development with improved IDE support and compile-time error checking
+
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework for rapid, responsive styling with a consistent design system
+
+### Tooling
+- **pnpm** - Fast, disk-efficient package manager
+- **GitHub Pages** - Static site hosting with automated deployments
+- **GitHub Actions** - CI/CD pipeline for automated builds and deployments

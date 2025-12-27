@@ -1,0 +1,77 @@
+---
+title: Visual Studio Code Configuration
+status: In Development
+description: My personalised configuration for Visual Studio Code.
+technologies: ["Visual Studio Code", "Extensions", "Settings"]
+categories: [personal]
+link: https://github.com/liiam-dsouza/visual-studio-code-configuration
+startDate: 2025-11-24
+endDate: null
+---
+import Figure from "@components/Figure.astro"
+import PullQuote from "@components/PullQuote.astro"
+import Highlight from "@components/Highlight.astro"
+
+![Hero](/images/projects/visual-studio-code-configuration/hero.png)
+
+This is my highly customised Visual Studio Code configuration designed to create a minimal, distraction-free coding environment with the Catppuccin Mocha theme. The configuration focuses on removing visual clutter, improving focus, and creating a clean aesthetic while maintaining productivity features.
+
+## Installed Extensions
+
+The configuration uses three carefully selected extensions:
+
+### 1. **Catppuccin Theme** (<Highlight>catppuccin. catppuccin-vsc</Highlight>)
+**Purpose:** Provides the Catppuccin color theme for VS Code
+
+This extension applies the "Catppuccin Mocha" theme, which is a warm, pastel-based color scheme designed to be easy on the eyes during long coding sessions.  The Mocha variant specifically uses darker backgrounds with soothing purple, pink, and blue accent colors.
+
+### 2. **Catppuccin Icons** (<Highlight>catppuccin.catppuccin-vsc-icons</Highlight>)
+**Purpose:** Provides matching file and folder icons
+
+This extension complements the Catppuccin theme by adding consistent iconography throughout the editor. The icons use the same color palette as the theme, creating a cohesive visual experience.  The configuration specifically hides explorer arrows for an even cleaner look.
+
+### 3. **Custom UI Style** (<Highlight>subframe7536.custom-ui-style</Highlight>)
+**Purpose:** Advanced UI customization through custom CSS
+
+This extension allows deep customization of VS Code's interface through custom stylesheets and Electron settings. It enables modifications that aren't possible through standard VS Code settings, such as:
+- Custom positioning of macOS traffic lights (window control buttons)
+- Removal of box shadows and borders
+- Custom positioning of UI elements
+- Fine-tuned spacing and padding adjustments
+
+![In Action](/images/projects/visual-studio-code-configuration/editing-file.png)
+
+## Configuration Philosophy
+
+The configuration follows a **minimalist, distraction-free philosophy** with these core principles:
+
+### 1. **Reduced Visual Clutter**
+- Hidden activity bar, status bar, and minimap
+- Disabled breadcrumbs and sticky scroll
+- Removed scrollbars (while maintaining scroll functionality)
+- Hidden file icons and decorations in many areas
+- No indent guides or whitespace rendering
+
+### 2. **Focus on Content**
+- Single tab mode to focus on one file at a time
+- No startup editor (clean slate on launch)
+- Relative line numbers for easier navigation
+- Disabled tips and recommendations
+
+### 3. **Cleaner Git Integration**
+- Disabled git decorations to reduce visual noise
+- No diff decorations in source control view
+
+### 4. **Optimized Typography**
+- JetBrains Mono Nerd Font for excellent code readability
+- Font ligatures enabled for cleaner operators
+- Increased line height (2x) for better readability
+- Italic comments for visual distinction
+
+## Notes
+
+- This configuration is optimized for **focus and minimalism** over displaying all possible information
+- Many features are hidden but still accessible via keyboard shortcuts
+- The setup works best on larger screens where the zoom level and spacing are comfortable
+- Some customisations may require VS Code restart to take full effect
+- The configuration disables automatic updates (`"update.mode": "none"`) - remember to update manually

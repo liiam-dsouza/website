@@ -1,12 +1,12 @@
 ---
 import { getCollection, type CollectionEntry, type ReferenceDataEntry } from "astro:content"
-import { readingTime } from "../utils/helpers"
+import { readingTime } from "@utils/helpers"
 
-import Main from "../layouts/Main.astro"
-import Link from "../components/Link.astro"
-import Tag from "../components/Tag.astro"
-import PostNavigation from "../components/PostNavigation.astro"
-import Heading from "../components/Heading.astro"
+import Main from "@layouts/Main.astro"
+import Link from "@components/Link.astro"
+import Tag from "@components/Tag.astro"
+import PostNavigation from "@components/PostNavigation.astro"
+import Heading from "@components/Heading.astro"
 
 interface Props {
     frontmatter: {

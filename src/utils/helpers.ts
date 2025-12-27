@@ -11,3 +11,27 @@ export const readingTime = (text: string | undefined) => {
     const minutes = Math.ceil(words / wordsPerMinute)
     return minutes
 }
+
+export const formatDuration = (start: Date, end: Date) => {
+    let months =
+        (end.getFullYear() - start.getFullYear()) * 12 +
+        (end.getMonth() - start.getMonth()) + 1
+
+    const years = Math.floor(months / 12)
+    months = months % 12
+
+    const parts: string[] = []
+
+    if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`)
+    if (months > 0) parts.push(`${months} mo${months > 1 ? "s" : ""}`)
+
+    return parts.join(" ")
+}
+
+export const formatMonthYear = (date: Date) => {
+    date.toLocaleDateString(undefined, {
+        month: "short",
+        year: "numeric",
+        timeZone: "UTC",
+    })
+}
