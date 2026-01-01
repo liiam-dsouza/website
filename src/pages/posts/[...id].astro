@@ -10,8 +10,6 @@ export async function getStaticPaths() {
         (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
     )
 
-    console.log(sortedPosts.map(p => p.id))
-
     return sortedPosts.map((post, index) => ({
         params: { id: post.id },
         props: {
@@ -32,6 +30,6 @@ const { post, previousPost, nextPost } = Astro.props
 const { Content } = await render(post)
 ---
 
-<PostWrapper frontmatter={ post.data } previousPost={ previousPost } nextPost={ nextPost } post={ post }>
+<PostWrapper post={ post } previousPost={ previousPost } nextPost={ nextPost }>
     <Content />
 </PostWrapper>

@@ -1,11 +1,7 @@
 ---
-interface Props {
-    text: string
-}
 
-const { text } = Astro.props
 ---
 
-<span class="bg-neutral-200 px-2 py-1 font-light text-sm rounded-md hover:bg-neutral-300 hover:cursor-default">
-    { text }
+<span class="inline-flex max-w-max text-sm bg-neutral-200 hover:bg-neutral-300 font-medium rounded-lg px-2 py-1 cursor-pointer transition-all duration-200">
+    <slot />
 </span>

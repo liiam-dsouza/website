@@ -1,36 +1,37 @@
 ---
 import type { CollectionEntry } from "astro:content"
-import { withBase, readingTime } from "@utils/helpers"
+import { readingTime, withBase, sortTags, formatTags } from "@utils/helpers"
 
-import Link from "./Link.astro"
-import Badge from "./Badge.astro"
 import Card from "./Card.astro"
+import CardDescription from "./CardDescription.astro"
+import CardHeading from "./CardHeading.astro"
+import Date from "./Date.astro"
+import Link from "./Link.astro"
+import Tag from "./Tag.astro"
 
-type Props = {
+interface Props {
     post: CollectionEntry<"posts">
 }
 
-const { post } = Astro.props
-const { cover, coverAlt, title, description, date, tags } = post.data
+const { post } = Astro.props as Props
+const { title, description, type, kind, tags, date } = post.data
 ---
 
-<article>
-    <Card>
-        <h3 class="mb-1 text-lg font-semibold">{ title }</h3>
-        <div class="flex flex-row items-center gap-2">
-            <time datetime={ date.toISOString() } class="text-sm">
-                {
-                    date.toLocaleDateString(undefined, {
-                        dateStyle: "medium",
-                        timeZone: "UTC",
-                    })
-                }
-            </time>
-
-            <Badge text={ `${ readingTime(post.body) } min read` } />
-        </div>
-        <p class="my-2 text-md text-muted-foreground">{ description }</p>
-
-        <Link url={ withBase(`posts/${ post.id }`) } text="Read Post" icon={{ name: "arrow-big-right-lines", side: "right"   }}  />
-    </Card>
-</article>
+<Card>
+    <span class="my-2"><Tag>{ type }</Tag></span>
+    <CardHeading>{ title }</CardHeading>
+    <div class="flex flex-row items-center gap-2">
+        <Date date={ date } format="medium" />
+        <span>•</span>
+        <span class="text-sm">{ readingTime(post.body) } min read</span>
+    </div>
+    <span class="mb-2"><CardDescription>{ description }</CardDescription></span>
+    <Link url={ withBase(`posts/${ post.id }`) } text="Read post" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+    <div class="mt-8 flex flex-wrap gap-2">
+        {
+            formatTags(kind).sort().map((tag) => (
+                <Tag>{ `${ tag }` }</Tag>
+            ))
+        }
+    </div>
+</Card>

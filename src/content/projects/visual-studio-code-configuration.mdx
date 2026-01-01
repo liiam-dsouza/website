@@ -1,12 +1,15 @@
 ---
+cover: /images/projects/visual-studio-code-configuration/hero.png
+coverAlt: Screenshot of the visual studio code configuration with catppuccin mocha theme applied.
 title: Visual Studio Code Configuration
-status: In Development
-description: My personalised configuration for Visual Studio Code.
-technologies: ["Visual Studio Code", "Extensions", "Settings"]
-categories: [personal]
+status: Completed
+description: A meticulously crafted Visual Studio Code configuration that transforms the default editor into a minimal, distraction-free coding environment. The setup leverages custom themes and UI modifications to create a clean, aesthetically pleasing workspace that prioritises focus and code readability.
+tags: [👨‍💻 Visual Studio Code, 🛠️ Extensions, ⚙️ Settings]
+category: 👨‍💻 Personal
 link: https://github.com/liiam-dsouza/visual-studio-code-configuration
 startDate: 2025-11-24
-endDate: null
+endDate: 2025-12-03
+featured: true
 ---
 import Figure from "@components/Figure.astro"
 import PullQuote from "@components/PullQuote.astro"
@@ -14,23 +17,73 @@ import Highlight from "@components/Highlight.astro"
 
 ![Hero](/images/projects/visual-studio-code-configuration/hero.png)
 
-This is my highly customised Visual Studio Code configuration designed to create a minimal, distraction-free coding environment with the Catppuccin Mocha theme. The configuration focuses on removing visual clutter, improving focus, and creating a clean aesthetic while maintaining productivity features.
+{/* technologies: ["Visual Studio Code", "Extensions", "Settings"] */}
 
-## Installed Extensions
+This is my meticulously crafted Visual Studio Code configuration repository that provides a reproducible, minimalist editor setup.  This project serves as a complete snapshot of my personal VS Code environment, enabling quick replication across machines and serving as documentation for my development workflow.
+
+My configuration emphasises a distraction-free coding experience with a carefully curated aesthetic built around the Catppuccin Mocha theme, relative line numbers for efficient navigation, and extensive UI customisations that strip away visual clutter while maintaining functionality.
+
+## Project Context
+
+Modern developers often work across multiple machines - personal computers, work laptops, remote environments, and maintaining a consistent editor configuration can be challenging. This project solves that problem by version-controlling the entire VS Code setup, making it portable and shareable.
+
+The repository was designed with several goals in mind:
+- **Portability**: Easily replicate the exact editor environment on any machine
+- **Documentation**: Serve as a reference for configuration choices and customizations
+- **Minimalism**:  Create a focused coding environment by removing unnecessary UI elements
+- **Aesthetics**: Maintain a cohesive visual experience through theme and icon consistency
+
+The configuration reflects a philosophy of intentional design - every setting has been deliberately chosen to either improve productivity or enhance the visual experience.  The hidden status bar, concealed activity bar, and disabled minimap are all conscious choices to maximize screen real estate for what matters most: **the code**.
+
+## Key Features
+
+### Comprehensive Configuration Files
+- **settings.json**: Over 190 lines of extensively commented VS Code settings covering theme, appearance, editor behavior, Git integration, UI customisations, and more
+- **extensions. txt**: Curated list of essential extensions including the Catppuccin theme, icon pack, and custom UI styling tools
+
+### Minimalist UI Approach
+- Hidden activity bar, status bar, and minimap for maximum screen real estate
+- Disabled breadcrumbs, sticky scroll, and CodeLens for reduced visual clutter
+- Hidden scrollbars while maintaining scrolling functionality
+- Transparent overview ruler markers to eliminate distracting indicators
+- Single tab mode and right-aligned sidebar for a unique layout
+
+### Advanced Editor Customizations
+- Relative line numbers for efficient Vim-style navigation
+- JetBrains Mono Nerd Font with ligatures enabled for improved readability
+- Increased line height (2x) for better visual breathing room
+- Italic rendering for code comments
+- Custom traffic light positioning on macOS for aesthetic appeal
+- Extensively styled quick input widget and find dialog
+
+### Developer Experience Enhancements
+- Automatic file saving after delays to prevent lost work
+- Trailing whitespace trimming on save for cleaner commits
+- IntelliSense and parameter hints configured for optimal suggestions
+- Emmet expansion support for rapid HTML/CSS development
+- Disabled Git decorations for a cleaner explorer view
+
+
+## Tech Stack
+
+### Primary Technology
+- Visual Studio Code - The extensible code editor from Microsoft
+
+### Installed Extensions
 
 The configuration uses three carefully selected extensions:
 
-### 1. **Catppuccin Theme** (<Highlight>catppuccin. catppuccin-vsc</Highlight>)
+**Catppuccin Theme** (<Highlight>catppuccin.catppuccin-vsc</Highlight>)
 **Purpose:** Provides the Catppuccin color theme for VS Code
 
 This extension applies the "Catppuccin Mocha" theme, which is a warm, pastel-based color scheme designed to be easy on the eyes during long coding sessions.  The Mocha variant specifically uses darker backgrounds with soothing purple, pink, and blue accent colors.
 
-### 2. **Catppuccin Icons** (<Highlight>catppuccin.catppuccin-vsc-icons</Highlight>)
+**Catppuccin Icons** (<Highlight>catppuccin.catppuccin-vsc-icons</Highlight>)
 **Purpose:** Provides matching file and folder icons
 
 This extension complements the Catppuccin theme by adding consistent iconography throughout the editor. The icons use the same color palette as the theme, creating a cohesive visual experience.  The configuration specifically hides explorer arrows for an even cleaner look.
 
-### 3. **Custom UI Style** (<Highlight>subframe7536.custom-ui-style</Highlight>)
+**Custom UI Style** (<Highlight>subframe7536.custom-ui-style</Highlight>)
 **Purpose:** Advanced UI customization through custom CSS
 
 This extension allows deep customization of VS Code's interface through custom stylesheets and Electron settings. It enables modifications that aren't possible through standard VS Code settings, such as:
@@ -39,36 +92,7 @@ This extension allows deep customization of VS Code's interface through custom s
 - Custom positioning of UI elements
 - Fine-tuned spacing and padding adjustments
 
-![In Action](/images/projects/visual-studio-code-configuration/editing-file.png)
-
-## Configuration Philosophy
-
-The configuration follows a **minimalist, distraction-free philosophy** with these core principles:
-
-### 1. **Reduced Visual Clutter**
-- Hidden activity bar, status bar, and minimap
-- Disabled breadcrumbs and sticky scroll
-- Removed scrollbars (while maintaining scroll functionality)
-- Hidden file icons and decorations in many areas
-- No indent guides or whitespace rendering
-
-### 2. **Focus on Content**
-- Single tab mode to focus on one file at a time
-- No startup editor (clean slate on launch)
-- Relative line numbers for easier navigation
-- Disabled tips and recommendations
-
-### 3. **Cleaner Git Integration**
-- Disabled git decorations to reduce visual noise
-- No diff decorations in source control view
-
-### 4. **Optimized Typography**
-- JetBrains Mono Nerd Font for excellent code readability
-- Font ligatures enabled for cleaner operators
-- Increased line height (2x) for better readability
-- Italic comments for visual distinction
-
-## Notes
+### Notes
 
 - This configuration is optimized for **focus and minimalism** over displaying all possible information
 - Many features are hidden but still accessible via keyboard shortcuts

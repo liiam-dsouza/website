@@ -2,7 +2,6 @@ import { defineCollection } from "astro:content"
 import { glob } from "astro/loaders"
 import { z } from "astro/zod"
 
-import tagsJson from "@content/tags.json"
 import { experienceJson } from "@content/experience"
 
 const posts = defineCollection({
@@ -10,27 +9,13 @@ const posts = defineCollection({
         pattern: "**/*.{md,mdx}",
         base: "./src/content/posts",
     }),
-    schema: ({ image }) => z.object({
-        cover: image().optional(),
-        coverAlt: z.string().optional(),
-        title: z.string(),
-        description: z.string().optional(),
-        date: z.date(),
-        tags: z.array(z.string()).optional(),
-    }),
-})
-
-const tags = defineCollection({
-    loader: async () => {
-        return tagsJson.map((tag) => ({
-            id: tag.name.toLowerCase().replace(/\s+/g, '-'),
-            name: tag.name,
-            emoji: tag.emoji,
-        }))
-    },
     schema: z.object({
-        name: z.string(),
-        emoji: z.string(),
+        title: z.string(),
+        description: z.string(),
+        type: z.string(),
+        kind: z.array(z.string()).optional().default([]),
+        tags: z.array(z.string()).optional().default([]),
+        date: z.date(),
     }),
 })
 
@@ -40,18 +25,18 @@ const experience = defineCollection({
             id: experience.role.toLowerCase().replace(/\s+/g, '-'),
             role: experience.role,
             company: experience.company,
-            startDate: experience.startDate,
-            endDate: experience.endDate,
             description: experience.description,
             skills: experience.skills,
+            startDate: experience.startDate,
+            endDate: experience.endDate,
         }))
     },
     schema: z.object({
         role: z.string(),
         company: z.string(),
-        startDate: z.string(),
-        endDate: z.string().nullable(),
         description: z.string(),
+        startDate: z.date(),
+        endDate: z.date().nullable(),
         skills: z.array(z.string()),
     }),
 })
@@ -61,18 +46,32 @@ const projects = defineCollection({
         pattern: "**/*.{md,mdx}",
         base: "./src/content/projects",
     }),
-    schema: ({ image }) => z.object({
-        cover: image().optional(),
-        coverAlt: z.string().optional(),
+    schema: z.object({
+        cover: z.string().optional().default(""),
+        coverAlt: z.string().optional().default("Project cover image"),
         title: z.string(),
         status: z.enum(["In Development", "Completed"]),
-        description: z.string().optional(),
-        link: z.string().url(),
-        technologies: z.array(z.string()).optional(),
-        categories: z.array(z.string()).optional(),
+        featured: z.boolean(),
+        description: z.string(),
         startDate: z.date(),
         endDate: z.date().nullable(),
+        tags: z.array(z.string()),
+        category: z.string(),
+        link: z.string().url(),
     }),
 })
 
-export const collections = { posts, tags, experience, projects }
+const resources = defineCollection({
+    loader: glob({
+        pattern: "**/*.{md,mdx}",
+        base: "./src/content/resources",
+    }),
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        link: z.string().url(),
+        tags: z.array(z.string()),
+    }),
+})
+
+export const collections = { posts, experience, projects, resources }

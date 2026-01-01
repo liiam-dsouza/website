@@ -5,54 +5,40 @@ import Main from "@layouts/Main.astro"
 import Link from "@components/Link.astro"
 import Tag from "@components/Tag.astro"
 import Heading from "@components/Heading.astro"
+import Figure from "@components/Figure.astro"
+import type { CollectionEntry } from "astro:content"
 
 interface Props {
-    frontmatter: {
-        title: string
-        description?: string | undefined
-        status: string
-        cover?: {
-            src: string
-            width: number
-            height: number
-            format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-        } | undefined
-        coverAlt?: string | undefined
-        technologies?: string[] | undefined
-        categories?: string[] | undefined
-        link: string
-    }
+    project: CollectionEntry<"projects">
 }
 
-const { frontmatter } = Astro.props as Props
-
-
+const { project } = Astro.props as Props
+const { title, description, status, tags, link } = project.data
 ---
 
-<Main title={ frontmatter.title } description={ frontmatter.description }>
+<Main title={ title } description={ description }>
     <article>
         <div class="mx-auto">
             <div class="flex flex-col gap-y-2 my-8 max-w-full mx-auto px-2">
-                <Link url="/#projects" text="Back" icon={{ name: "arrow-big-left-lines", side: "left" }} />
-                <Heading size="large">{ frontmatter.title }</Heading>
-                <span class="font-semibold">Status: <span class="italic text-primary font-normal">[{ frontmatter.status }]</span></span>
+                <Link url="/#projects" text="Back" icon={{ name: "arrow-big-left-lines", side: "left" }} animated />
+                <Heading size="large">{ title }</Heading>
+                <span class="font-semibold">Status: <span class="italic text-primary font-normal">[{ status }]</span></span>
 
                 <div class="flex flex-wrap gap-2">
-                    { frontmatter.technologies &&
-                        frontmatter.technologies
-                        .sort()
-                        .map((tag) => (
-                        <Tag text={ tag } />
-                    ))}
+                    {
+                        tags.sort().map((tag) => (
+                            <Tag>{ `${ tag.toUpperCase() }` }</Tag>
+                        ))
+                    }
                 </div>
             </div>
 
-            <div class="prose md:max-w-5/6 max-w-full mx-auto px-2">
+            <div class="prose max-w-full mx-auto px-2">
                 <slot />
             </div>
 
             <div class="flex flex-col">
-                <Link url={ frontmatter.link } text="Visit project repo" icon={{ name: "arrow-big-right-lines", side: "right" }} class="my-8 mx-auto" />
+                <Link url={ link } text="Visit project repo" icon={{ name: "arrow-big-right-lines", side: "right" }} class="my-8 mx-auto" />
             </div>
         </div>
     </article>

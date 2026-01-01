@@ -1,0 +1,70 @@
+---
+title: RSA Encryption & Shor's Algorithm
+description: A case study I wrote in my first year of uni that explored RSA encryption fundamentals, cryptographic principles, and their implications in a quantum computing context.
+date: 2023-06-04
+type: 🔍 Case Study
+kind: [🏗️ Foundational, 🎓 Academic, 📦 Archive]
+tags: [🔑 Encryption, ⚛️ Quantum Computing, ⚙️ Algorithms]
+---
+
+import Figure from "@components/Figure.astro"
+import PullQuote from "@components/PullQuote.astro"
+
+This case study was written during my first year of engineering as part of my early exploration into cryptography and secure systems.
+At the time, it represented my foundational understanding of RSA encryption, the mathematical principles behind it, and its role in modern computing.
+While my technical depth has evolved since then, this work captures an important point in my learning journey and the ideas that first sparked my interest in secure and trustworthy technology.
+
+I’ve chosen to include this case study on my website as both an archive and a reflection.
+Looking back on early academic work provides useful context for how my thinking has developed over time, and highlights the progression from foundational theory to more applied and human-centred approaches to technology.
+It also serves as a reminder that meaningful technical growth is built on curiosity, iteration, and a willingness to learn from early work.
+
+---
+
+## 1. Motivation
+
+The Rivest-Shamir-Adleman (RSA) encryption algorithm is an asymmetric encryption algorithm
+widely used across the internet in many products and services. Asymmetric encryption works on a
+private key – public key encryption system.
+
+A person sending data over the internet would encrypt the data with their public key before sending
+it off, and it can then be decrypted using the receiver’s private key. It is used in messaging services
+that use end-to-end encryption such as Facebook Messenger, iMessage and WhattsApp. This case
+study will look at the underlying computational algorithm responsible for RSA encryption – the
+current standard for data encryption on the internet.
+
+Put simply, the motivation for the RSA encryption algorithm is ensuring the integrity of data being
+sent over the internet.
+
+## 2. Materials
+
+In this scenario, the ‘materials’ being used in this algorithm is anything a user is sending that
+they would want to be encrypting. For demonstration purposes, as it is generally easier, it will be
+assumed they are sending a short string of text, as if they were messaging someone on Facebook
+Messenger.
+
+## 3. Method
+
+The implementation of the RSA encryption algorithm relies heavily on modular arithmetic, Euler’s
+theorem and Euler’s totient function. To generate the public and private keys used to encrypt and
+decrypt information, a user would use the following process.
+
+1. The receiver chooses 2 large prime numbers, p and q. Their product n = pq will be half of
+their public key.
+2. The reciever then calculates (pq)=(p−1)(q−1) and chooses a number, e, which is relatively
+prime to (pq). This number e is a number which is relatively prime to (pq), and is most
+commonly 2^16 + 1 = 65537, however it could technically be as small as 3. It makes up the
+second half of their public key.
+3. The receiver would then calculate the modular inverse, called d, of e. This value d would be
+their private key - which they would use to decrypt messages they receive.
+4. Lastly the receiver would distribute both parts of their public key, n and e, so people can
+use it to encrypt messages to send to them. However, they would keep their private key, d, a
+secret and not share it with anyone. (Brilliant, n.d.)
+
+Currently RSA is the standard for encrypting information on the internet as it is very hard to find
+the prime factors of a very large prime number. Standard lengths of RSA keys are generally around
+2048 bits for a high-strength key (IBM, 2021). Using classical computing methods available today,
+it would take approximately 300 trillion years to break a 2048-bit encryptiion.
+
+MIT mathematician Peter Shor developed Shor’s algorithm for factoring large numbers in 1994, a
+theoretical quantum algorithm which would be capable of breaking an RSA encryption in a matter
+of hours.

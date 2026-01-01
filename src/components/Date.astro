@@ -1,0 +1,17 @@
+---
+interface Props {
+    date: Date
+    format: "long" | "medium" | "short"
+}
+
+const { date, format } = Astro.props as Props
+---
+
+<time datetime={ date.toISOString() } class="text-sm">
+    {
+        date.toLocaleDateString(undefined, {
+            dateStyle: format,
+            timeZone: "UTC",
+        })
+    }
+</time>

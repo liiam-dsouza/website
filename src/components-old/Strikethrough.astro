@@ -1,0 +1,17 @@
+---
+interface Props {
+    summary: string
+}
+
+const { summary } = Astro.props
+---
+
+<details class="inline">
+    <summary class="inline cursor-pointer list-none text-neutral-400 line-through decoration-dashed hover:text-neutral-600">
+        { summary }
+    </summary>
+
+    <span class="ml-1 text-neutral-700">
+        <slot />
+    </span>
+</details>

@@ -1,0 +1,17 @@
+---
+import { withBase } from "@utils/helpers"
+
+interface Props {
+    src: string
+    alt: string
+}
+
+const { src, alt } = Astro.props
+---
+
+<img
+    src={ withBase(src) }
+    alt={ alt }
+    loading="lazy"
+    class="w-full max-w-7xl rounded-lg border border-neutral-300"
+/>

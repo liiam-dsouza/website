@@ -1,0 +1,24 @@
+---
+import PostCard from "./PostCard.astro"
+import Heading from "./Heading.astro"
+
+import { getCollection } from "astro:content"
+import Section from "./Section.astro"
+
+const posts = (await getCollection("posts")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+)
+---
+
+<Section id="posts" border="top">
+    <Heading size="large">✏️ Writeups</Heading>
+    <div class="mx-auto">
+        <div class="grid gap-8 md:grid-cols-2">
+            {
+                posts.map((p) => (
+                    <PostCard post={p} />
+                ))
+            }
+        </div>
+    </div>
+</section>

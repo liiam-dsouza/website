@@ -1,48 +1,56 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content"
+import type { CollectionEntry } from "astro:content"
+import { formatTags, withBase } from "@utils/helpers"
 
 import Card from "./Card.astro"
-import Tag from "./Tag.astro"
-import Link from "./Link.astro"
+import CardDescription from "./CardDescription.astro"
+import CardHeading from "./CardHeading.astro"
 import Duration from "./Duration.astro"
+import Image from "./Image.astro"
+import Link from "./Link.astro"
+import Tag from "./Tag.astro"
 
-type Props = {
+interface Props {
     project: CollectionEntry<"projects">
 }
 
 const { project } = Astro.props as Props
-const { title, description, status, technologies, categories, startDate, endDate } = project.data
-
-const allTags = await getCollection("tags")
-
-const tagData =  project.data.categories ? allTags.filter((tag) => project.data.categories!.includes(tag.id)) : []
-const start = new Date(project.data.startDate)
-const end = project.data.endDate ? new Date(project.data.endDate) : null
+const { title, description, status, link, cover, coverAlt, startDate, endDate, tags, category } = project.data
+const start = new Date(startDate)
+const end = endDate ? new Date(endDate) : null
 ---
 
 <Card>
-    <div class="mb-4 flex flex-col gap-y-2">
-        <div class="flex justify-between items-center border-b border-neutral-200 p-2">
-            <div class="flex flex-wrap gap-2">
-                { tagData?.sort().map((tag) => (
-                    <Tag text={ `${tag.data.emoji} ${tag.data.name}` } />
-                ))}
+    <div>
+        <div class="flex flex-row justify-between items-center pb-2">
+            <div class="flex flex-wrap gap-2 mb-2">
+                {
+                    <Tag>{ `${ category.toUpperCase() }` }</Tag>
+                }
             </div>
 
-            <div class="flex items-center gap-2 my-2 text-sm font-semibold">
-                <Duration start={ start } end={ end } current={ project.data.endDate ? false : true} />
+            <div class="flex items-center gap-2 my-2 font-semibold">
+                <Duration start={ start } end={ end } current={ endDate ? false : true} />
             </div>
         </div>
-        <h3 class="text-lg font-semibold">{ title }</h3>
-        <span class="text-sm italic text-primary font-medium">[{ status }]</span>
-        <p class="text-sm text-muted-foreground">{ description }</p>
+        <Image src={ cover } alt={ coverAlt } />
     </div>
 
-    <div class="mb-4 flex flex-wrap gap-2">
-        { technologies?.sort().map((tag) => (
-            <Tag text={ tag } />
-        ))}
-    </div>
+    <div class="flex flex-col mt-2">
+        <div class="mb-2">
+            <CardHeading>{ title }</CardHeading>
+            <span class="text-sm italic text-primary font-medium">[{ status }]</span>
+            <CardDescription>{ description }</CardDescription>
+        </div>
 
-    <Link url={ `/projects/${ project.id }` } text="View Project" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" />
+        <Link url={ withBase(`projects/${ project.id }`) } text="Explore project" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+
+        <div class="mt-8 flex flex-wrap gap-2">
+            {
+                formatTags(tags).sort().map((tag) => (
+                    <Tag>{ `${ tag }` }</Tag>
+                ))
+            }
+        </div>
+    </div>
 </Card>

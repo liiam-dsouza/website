@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content"
+import { formatDuration } from "@utils/helpers"
+
+import Tag from "./Tag.astro"
+import Badge from "./Badge.astro"
+import Card from "./Card.astro"
+import Heading from "./Heading.astro"
+import Section from "./Section.astro"
+
+const experience = await getCollection("experience")
+
+const allTags = await getCollection("tags")
+---
+
+<Section id="experience" inline>
+    <Heading size="small">💼 Experience</Heading>
+    <div class="mx-auto">
+        <div class="space-y-6">
+            {
+                experience.map((item) => {
+                    const start = new Date(item.data.startDate)
+                    const end = item.data.endDate ? new Date(item.data.endDate) : new Date()
+                    const tagData =  item.data.skills ? allTags.filter((tag) => item.data.skills.includes(tag.id)) : []
+
+                    return (
+                        <Card>
+                            <div class="flex flex-col">
+                                <div>
+                                    <h3 class="text-lg font-semibold">{ item.data.role }</h3>
+                                    <span class="text-sm">{ item.data.company }</span>
+                                    <div class="flex items-center gap-2 my-2 text-xs text-muted-foreground">
+                                        <span>
+                                            {
+                                                start.toLocaleDateString(undefined, {
+                                                    month: "short",
+                                                    year: "numeric",
+                                                    timeZone: "UTC",
+                                                })
+                                            }
+                                            -
+                                            {
+                                                item.data.endDate ? end.toLocaleDateString(undefined, {
+                                                    month: "short",
+                                                    year: "numeric",
+                                                    timeZone: "UTC",
+                                                })
+                                                : "Present"
+                                            }
+                                        </span>
+
+                                        <Badge text={ formatDuration(start, end) } />
+                                    </div>
+                                </div>
+                                <p class="mb-2 text-sm text-muted-foreground">
+                                    { item.data.description }
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    { tagData.sort().map((skill) => (
+                                        <Tag text={ `${skill.data.emoji} ${skill.data.name}` } />
+                                    ))}
+                                </div>
+                            </div>
+                        </Card>
+                    )
+                })
+            }
+        </div>
+    </div>
+</Section>
+

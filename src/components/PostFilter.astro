@@ -1,0 +1,40 @@
+---
+import "@styles/global.css"
+
+import type { CollectionEntry } from "astro:content"
+import PostCard from "./PostCard.astro"
+import TagButtons from "./TagButtons.astro"
+import { getTagId } from "@utils/helpers"
+import Filter from "./Filter.astro"
+
+interface Props {
+    posts: CollectionEntry<"posts">[]
+}
+
+const { posts } = Astro.props as Props
+const types = Array.from(
+    new Set(
+        posts
+        .map((post) => post.data.type)
+        .filter(Boolean)
+    )
+)
+---
+<section>
+    <TagButtons tags={types} />
+
+    <div class="grid md:grid-cols-2 gap-6">
+        {
+            posts.map((post) => {
+                const { type } = post.data
+                return (
+                    <article class="card" data-tags={ getTagId(type).toLowerCase() } >
+                        <PostCard post={ post } />
+                    </article>
+                )
+            })
+        }
+    </div>
+</section>
+
+<Filter />
