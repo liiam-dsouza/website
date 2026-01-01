@@ -35,8 +35,8 @@ const experience = defineCollection({
         role: z.string(),
         company: z.string(),
         description: z.string(),
-        startDate: z.string(),
-        endDate: z.string().nullable(),
+        startDate: z.date(),
+        endDate: z.date().nullable(),
         skills: z.array(z.string()),
     }),
 })

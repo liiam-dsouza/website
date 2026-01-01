@@ -1,103 +1,66 @@
----
-import Tag from "./Tag.astro"
-import Link from "./Link.astro"
-import Experience from "./Experience.astro"
-import Heading from "./Heading.astro"
-import Section from "./Section.astro"
+<section id="intro" class="mb-8">
+        <Heading>ℹ️ About Me</Heading>
+        <Subheading>A snapshot of my journey in technology, teaching, and learning - from projects and workshops to the ideas and values that drive my work.</Subheading>
+    </section>
 
-import { SOCIAL_LINKS } from "../consts"
+    <section id="who-am-i" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">👨‍💻 Who I Am</h3>
 
-const skills = [
-    "Public Speaking",
-    "Workshop Facilitation",
-    "Project Management",
-    "Event Coordination",
-    "Leadership",
-]
+        <p>
+            Hi, I'm Liam. I'm a final-year engineering student specialising in computer and software systems, with a particular interest in building thoughtful, human-centric technology experiences.
+            I enjoy exploring the intersection of development, design, and education - creating systems that are not only technically sound, but also understandable, maintainable, and usable for the people interacting with them.
+        </p>
 
-const technical_skills = [
-    "Python",
-    "TypeScript",
-    "HTML & CSS",
-    "Astro",
-    "Git & GitHub",
-    "Visual Studio Code",
-    "Node.js",
-    "Docker",
-    "Bash Scripting",
-    "Lua",
-]
----
+        <p>
+            I'm curious by nature and driven by problem-solving.
+            While technology is the tool, I care most about the people behind it: how teams collaborate, how learners engage with complex topics, and how ideas evolve into meaningful outcomes.
+        </p>
+    </section>
 
-<Section id="about" border="top">
-    <Heading size="large">ℹ️ About Me</Heading>
-    <div class="mx-auto">
-        <div class="grid gap-12 md:grid-cols-2">
-            <div class="space-y-6 leading-relaxed">
-                <p>
-                    I'm passionate about technology, innovation, and STEM,
-                    and I love solving complex problems. Through a mix of
-                    tech-focussed and educational roles, I've developed strong
-                    communication skills and a people-first approach to my work.
-                </p>
-                <p>
-                    Empathy and collaboration are big parts of how I operate, whether I'm
-                    contributing to a team or taking lead, I focus on building meaningful
-                    relationships and delivering high-quality results. I'm adaptable,
-                    comfortable under pressure and always keen to learn something new.
-                </p>
-                <p>
-                    I've contributed to projects that create real value for the
-                    communities and organisation's I'm a part of, and I've been
-                    recognised with awards for teamwork, critical thinking and innovation.
-                </p>
-                <p>
-                    As I near the end of my degree, I'm excited to work with emerging
-                    technologies and use them to make a positive impact for everyone.
-                </p>
-            </div>
+    <section id="" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">⚙️ What I Do</h3>
 
-            <div class="space-y-6 text-sm leading-relaxed">
-                <div>
-                    <h3 class="mb-2 font-semibold">Expertise</h3>
-                    <div class="flex flex-wrap gap-2">
-                        {
-                            skills.sort().map((skill) => (
-                                <Tag text={ skill } />
-                            ))
-                        }
-                    </div>
-                </div>
+        <p>
 
-                <div>
-                    <h3 class="mb-2 font-semibold">Technical Skills</h3>
-                    <div class="flex flex-wrap gap-2">
-                        {
-                            technical_skills.sort().map((skill) => (
-                                <Tag text={ skill } />
-                            ))
-                        }
-                    </div>
-                </div>
+        </p>
+    </section>
 
-                <div>
-                    <h3 class="mb-2 font-semibold">Connect</h3>
-                    <div class="space-y-1 text-sm text-muted-foreground">
-                        {
-                            SOCIAL_LINKS.sort((a, b) => a.name.localeCompare(b.name)).map((link) => (
-                                link.name !== "GitHub" ? (
-                                    <p>
-                                        { link.name }:{" "}
-                                        <Link url={ link.url } text={ link.text } class="underline" />
-                                    </p>
-                                ) : null
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section id=experience" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">🗂️ Experience</h3>
 
-        <Experience />
-    </div>
-</Section>
+        <p>
+
+        </p>
+    </section>
+
+    <section id="teaching" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">🎓 Teaching</h3>
+
+        <p>
+
+        </p>
+    </section>
+
+    <section id="values" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">⭐ Values</h3>
+
+        <p>
+
+        </p>
+    </section>
+
+    <section id="uses" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">🚀 Uses</h3>
+
+        <p>
+
+        </p>
+    </section>
+
+    <section id="contact" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">✉️ Contact</h3>
+
+        <p>
+
+        </p>
+    </section>

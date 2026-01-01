@@ -5,10 +5,14 @@ import Link from "@components/Link.astro"
 import Main from "@layouts/Main.astro"
 import Heading from "@components/Heading.astro"
 import Subheading from "@components/Subheading.astro"
-import Timeline from "@components/Timeline.astro"
+import Duration from "@components/Duration.astro"
+import Tag from "@components/Tag.astro"
 import { experienceJson } from "@content/experience"
 
 import { getCollection } from "astro:content"
+import { sortTags } from "@/utils/helpers"
+import CardHeading from "@/components/CardHeading.astro"
+import CardDescription from "@/components/CardDescription.astro"
 
 const featuredPosts = (await getCollection("posts")).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 2)
 const featuredProjects = (await getCollection("projects", ({ data }) => {
@@ -69,6 +73,31 @@ const featuredProjects = (await getCollection("projects", ({ data }) => {
         <Link url="/posts" text="Read all writeups" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
     </section>
 
-    <Timeline items={experienceJson} />
+    {
+        experienceJson.sort((a, b) => b.startDate.getTime() - a.startDate.getTime()).map((experience) => {
+            const start = new Date(experience.startDate)
+            const end = experience.endDate ? new Date(experience.endDate) : new Date()
+            return (
+                <section class="mb-8">
+                    <div class="flex flex-row items-center justify-between">
+                        <CardHeading>{ experience.role }</CardHeading>
+                        <span class="font-semibold"><Duration start={ start } end={ experience.endDate ? end : null } /></span>
+                    </div>
+                    <Subheading>{ experience.company }</Subheading>
+                    <p>
+                        { experience.description }
+                    </p>
+
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        {
+                            sortTags(experience.skills).map((skill) => (
+                                <Tag>{ skill }</Tag>
+                            ))
+                        }
+                    </div>
+                </section>
+            )
+        })
+    }
 </Main>
 
