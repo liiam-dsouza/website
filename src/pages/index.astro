@@ -1,19 +1,74 @@
 ---
+import PostCard from "@components/PostCard.astro"
+import ProjectCard from "@components/ProjectCard.astro"
+import Link from "@components/Link.astro"
 import Main from "@layouts/Main.astro"
-import Projects from "@components/Projects.astro"
-import Resources from "@components/Resources.astro"
-import About from "@components/About.astro"
-import Posts from "@components/Posts.astro"
+import Heading from "@components/Heading.astro"
+import Subheading from "@components/Subheading.astro"
+import Timeline from "@components/Timeline.astro"
+import { experienceJson } from "@content/experience"
+
+import { getCollection } from "astro:content"
+
+const featuredPosts = (await getCollection("posts")).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 2)
+const featuredProjects = (await getCollection("projects", ({ data }) => {
+    return data.featured === true
+})).sort((a, b) => a.data.title.localeCompare(b.data.title))
 ---
 
 <Main title="Home" description="View my website that showcases my projects, resources, and writeups.">
-    <Projects />
-    <Resources />
-    <About />
-    <Posts />
+    <section id="welcome" class="flex flex-col gap-y-2 mb-8">
+        <Heading>👋 Hello!</Heading>
+        <p>
+            I'm Liam D'Souza, a fourth-year software engineering student at the Queensland University of Technology.
+        </p>
 
-    <script>
-        console.log("Hey there, curious developer! 👋\nIf you're interested in checking out the source code for this website, feel free to visit my GitHub repository at https://github.com/liiam-dsouza/website")
-    </script>
+        <p>
+            I have a strong interest in emerging technologies including AI and cyber security, And I'm most passionate about using technology to solve real-world problems and enjoy working on projects that combine innovation, collaboration and creative thinking to create meaningful impact.
+        </p>
+
+        <p>
+            This site brings together a selection of projects, resources, and writeups that reflect how I build, learn, and share knowledge. Feel free to explore and reach out if anything catches your interest!
+        </p>
+    </section>
+
+    <section id="featured-projects" class="mb-8">
+        <Heading>🛠️ Featured Projects</Heading>
+        <Subheading>A selection of projects where I’ve focused on clarity, maintainability, and good developer experience.</Subheading>
+        <div class="grid md:grid-cols-2 gap-4 my-4">
+            {
+                featuredProjects.map((project) => {
+                    return (
+                        <ProjectCard project={ project } />
+                    )
+                })
+            }
+        </div>
+        <Link url="/projects" text="View all projects" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+    </section>
+
+    <section id="popular-resources" class="mb-8">
+        <Heading>📂 Popular Resources</Heading>
+        <Subheading>A selection of frequently used resources I use in the talks and workshops I deliver.</Subheading>
+        <div class="grid md:grid-cols-2 gap-4 my-4">
+
+        </div>
+        <Link url="#" text="Explore resources" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+    </section>
+
+    <section id="latest-writeups" class="mb-8">
+        <Heading>✏️ Latest Writeups</Heading>
+        <Subheading>Writing that ranges from technical deep dives to reflective pieces on events and experiences that shaped how I work.</Subheading>
+        <div class="grid md:grid-cols-2 gap-4 my-4">
+            {
+                featuredPosts.map((post) => (
+                    <PostCard post={ post } />
+                ))
+            }
+        </div>
+        <Link url="/posts" text="Read all writeups" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+    </section>
+
+    <Timeline items={experienceJson} />
 </Main>
 

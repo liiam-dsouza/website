@@ -1,0 +1,29 @@
+---
+
+---
+
+<script type="module">
+    const buttons = document.querySelectorAll(".filter-btn");
+    const posts = document.querySelectorAll(".card");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const selectedTag = button.dataset.tag
+
+            buttons.forEach((btn) =>
+                btn.classList.remove("active")
+            )
+            button.classList.add("active")
+
+            posts.forEach((post) => {
+                const postTags = post.dataset.tags.split(" ");
+
+                const visible =
+                selectedTag === "all" ||
+                postTags.includes(selectedTag);
+
+                post.classList.toggle("hidden", !visible);
+            })
+        })
+    })
+</script>

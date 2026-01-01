@@ -1,28 +1,26 @@
 ---
-import { getCollection } from "astro:content"
-
 import Main from "@layouts/Main.astro"
 import Link from "@components/Link.astro"
 import Tag from "@components/Tag.astro"
 import Heading from "@components/Heading.astro"
-import Figure from "@components/Figure.astro"
+import Subheading from "@components/Subheading.astro"
 import type { CollectionEntry } from "astro:content"
 
 interface Props {
-    project: CollectionEntry<"projects">
+    resource: CollectionEntry<"resources">
 }
 
-const { project } = Astro.props as Props
-const { title, description, status, tags, link } = project.data
+const { resource } = Astro.props as Props
+const { title, description, tags, link } = resource.data
 ---
 
 <Main title={ title } description={ description }>
     <article>
         <div class="mx-auto">
             <div class="flex flex-col gap-y-2 my-8 max-w-full mx-auto px-2">
-                <Link url="/#projects" text="Back" icon={{ name: "arrow-big-left-lines", side: "left" }} animated />
+                <Link url="/resources" text="Back" icon={{ name: "arrow-big-left-lines", side: "left" }} animated />
                 <Heading size="large">{ title }</Heading>
-                <span class="font-semibold">Status: <span class="italic text-primary font-normal">[{ status }]</span></span>
+                <Subheading>{ description }</Subheading>
 
                 <div class="flex flex-wrap gap-2">
                     {
@@ -38,7 +36,7 @@ const { title, description, status, tags, link } = project.data
             </div>
 
             <div class="flex flex-col">
-                <Link url={ link } text="Visit project repo" icon={{ name: "arrow-big-right-lines", side: "right" }} class="my-8 mx-auto" />
+                <Link url={ link } text="Visit GitHub repo" icon={{ name: "arrow-big-right-lines", side: "right" }} class="my-8 mx-auto" />
             </div>
         </div>
     </article>

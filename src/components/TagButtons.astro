@@ -1,0 +1,25 @@
+---
+import { formatTags, getTagId } from '@utils/helpers'
+
+interface Props {
+    tags: string[]
+}
+
+const { tags } = Astro.props as Props
+
+console.log(tags)
+---
+
+<div class="flex flex-wrap gap-2 my-4 mb-8">
+    <button class="filter-btn active" data-tag="all" >
+        All
+    </button>
+
+    {
+        formatTags(tags).map((tag) => (
+            <button class="filter-btn" data-tag={ getTagId(tag).toLowerCase() } >
+                { `${ tag }` }
+            </button>
+        ))
+    }
+</div>

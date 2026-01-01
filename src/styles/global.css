@@ -23,3 +23,11 @@ html {
         color-scheme: light ! important;
     }
 }
+
+.filter-btn {
+    @apply px-4 py-2 border border-primary rounded-lg text-sm bg-white hover:bg-primary hover:text-white transition-colors duration-200;
+}
+
+.active {
+    @apply bg-primary text-white;
+}

@@ -10,11 +10,14 @@ interface Props {
     },
     class?: string
     [key: string]: any
+    animated?: boolean
 }
 
-const { url, text, icon, class: extra, ...rest } = Astro.props
+const { url, text, icon, animated, class: extra, ...rest } = Astro.props
 
-const classes = `inline-flex items-center gap-2 text-primary transition-all hover:gap-3 ${extra ?? ""}`
+const animate = animated ? "hover:gap-3" : ""
+
+const classes = `inline-flex max-w-max items-center gap-2 text-primary ${ animate } transition-all ${extra ?? ""}`
 ---
 
 <a

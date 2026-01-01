@@ -1,0 +1,48 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+
+import Card from "./Card.astro"
+import Tag from "./Tag.astro"
+import Link from "./Link.astro"
+import Duration from "./Duration.astro"
+
+type Props = {
+    project: CollectionEntry<"projects">
+}
+
+const { project } = Astro.props as Props
+const { title, description, status, technologies, categories, startDate, endDate } = project.data
+
+const allTags = await getCollection("tags")
+
+const tagData =  project.data.categories ? allTags.filter((tag) => project.data.categories!.includes(tag.id)) : []
+const start = new Date(project.data.startDate)
+const end = project.data.endDate ? new Date(project.data.endDate) : null
+---
+
+<Card>
+    <div class="mb-4 flex flex-col gap-y-2">
+        <div class="flex justify-between items-center border-b border-neutral-200 p-2">
+            <div class="flex flex-wrap gap-2">
+                { tagData?.sort().map((tag) => (
+                    <Tag text={ `${tag.data.emoji} ${tag.data.name}` } />
+                ))}
+            </div>
+
+            <div class="flex items-center gap-2 my-2 text-sm font-semibold">
+                <Duration start={ start } end={ end } current={ project.data.endDate ? false : true} />
+            </div>
+        </div>
+        <h3 class="text-lg font-semibold">{ title }</h3>
+        <span class="text-sm italic text-primary font-medium">[{ status }]</span>
+        <p class="text-sm text-muted-foreground">{ description }</p>
+    </div>
+
+    <div class="mb-4 flex flex-wrap gap-2">
+        { technologies?.sort().map((tag) => (
+            <Tag text={ tag } />
+        ))}
+    </div>
+
+    <Link url={ `/projects/${ project.id }` } text="View Project" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" />
+</Card>

@@ -13,7 +13,7 @@ export const experienceJson = [
         "startDate": "2025-06-01",
         "endDate": null,
         "description": "Delivered hands-on STEM outreach for local high schools, introducing students to QUT engineering degrees and study pathways.",
-        "skills": ["leadership", "public-speaking", "teaching"]
+        "skills": ["🎤 Public Speaking", "🎓 Teaching", "👥 Leadership"]
     },
     {
         "role": "General Executive",
@@ -21,6 +21,6 @@ export const experienceJson = [
         "startDate": "2023-10-01",
         "endDate": "2025-05-30",
         "description": "Contributed to the delivery of student-led tech events that brought students and software and IT professionals together.",
-        "skills": ["teamwork", "event-coordination", "cross-team-collaboration", "leadership", "social-media"]
+        "skills": ["🤝 Teamwork", "📅 Event Coordination", "🌐 Cross-Team Collaboration", "👥 Leadership", "📱 Social Media"]
     }
 ]

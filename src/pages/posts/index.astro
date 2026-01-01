@@ -1,0 +1,21 @@
+---
+import Main from "@layouts/Main.astro"
+import Heading from "@components/Heading.astro"
+import Subheading from "@components/Subheading.astro"
+import PostFilter from "@components/PostFilter.astro"
+
+import { getCollection } from "astro:content"
+
+const allPosts = (await getCollection("posts")).sort((a, b) =>
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+)
+---
+
+<Main title="Posts" description="Read my latest writeups on software engineering, technology, and more.">
+    <section id="all-posts" class="mb-8">
+        <Heading>✏️ Writeups</Heading>
+        <Subheading>Writing that ranges from technical deep dives to reflective pieces on events and experiences that shaped how I work.</Subheading>
+        <PostFilter posts={allPosts} />
+    </section>
+</Main>
+

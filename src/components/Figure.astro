@@ -1,25 +1,21 @@
 ---
-import { withBase } from "@utils/helpers"
+import Image from './Image.astro'
 
 interface Props {
-    src: string;
-    alt: string;
-    caption?: string;
+    src: string
+    alt: string
+    caption?: string
 }
 
-const { src, alt, caption } = Astro.props;
+const { src, alt, caption = "" } = Astro.props
 ---
 
 <figure class="my-10 flex flex-col items-center">
-    <img
-        src={ withBase(src) }
+    <Image
+        src={ src }
         alt={ alt }
-        loading="lazy"
-        class="w-full max-w-7xl rounded-xl border border-neutral-300 shadow-sm"
     />
-    { caption && (
-        <figcaption class="mt-3 text-sm text-neutral-500 text-center max-w-2xl">
-            {caption}
-        </figcaption>
-    )}
+    <figcaption class="mt-3 text-sm text-neutral-500 text-center max-w-2xl">
+        { caption }
+    </figcaption>
 </figure>

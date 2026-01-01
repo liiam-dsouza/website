@@ -65,5 +65,5 @@ console.log("Writing to:", filepath)
 
 setTimeout(() => {
     execSync(`code ${filepath}`)
-}, 2000)
+}, 1500)
 
