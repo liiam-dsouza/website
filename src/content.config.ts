@@ -2,7 +2,9 @@ import { defineCollection } from "astro:content"
 import { glob } from "astro/loaders"
 import { z } from "astro/zod"
 
+import { eventsJson } from "@content/events"
 import { experienceJson } from "@content/experience"
+
 
 const posts = defineCollection({
     loader: glob({
@@ -16,6 +18,7 @@ const posts = defineCollection({
         kind: z.array(z.string()).optional().default([]),
         tags: z.array(z.string()).optional().default([]),
         date: z.date(),
+        draft: z.boolean().optional().default(false),
     }),
 })
 
@@ -38,6 +41,30 @@ const experience = defineCollection({
         startDate: z.date(),
         endDate: z.date().nullable(),
         skills: z.array(z.string()),
+    }),
+})
+
+const events = defineCollection({
+    loader: async () => {
+        return eventsJson.map((event) => ({
+            id: `${ event.title + event.role }`.toLowerCase().replace(/\s+/g, '-'),
+            cover: event.cover,
+            coverAlt: event.coverAlt,
+            title: event.title,
+            role: event.role,
+            type: event.type,
+            date: event.date,
+            description: event.description,
+        }))
+    },
+    schema: z.object({
+        cover: z.string(),
+        coverAlt: z.string(),
+        title: z.string(),
+        role: z.string(),
+        type: z.string(),
+        date: z.date(),
+        description: z.string(),
     }),
 })
 
@@ -74,4 +101,4 @@ const resources = defineCollection({
     }),
 })
 
-export const collections = { posts, experience, projects, resources }
+export const collections = { posts, experience, events, projects, resources }

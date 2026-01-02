@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "new": "node src/scripts/new.mjs"
+    "new": "node src/scripts/new.mts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

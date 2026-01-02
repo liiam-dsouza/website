@@ -11,13 +11,17 @@ interface Props {
     class?: string
     [key: string]: any
     animated?: boolean
+    inline?: boolean
+    underlined?: boolean
 }
 
-const { url, text, icon, animated, class: extra, ...rest } = Astro.props
+const { url, text, icon, animated, inline, underlined, class: extra, ...rest } = Astro.props
 
-const animate = animated ? "hover:gap-3" : ""
+const spacing = inline ? "gap-0" : "gap-2"
+const animate = animated ? inline ? "hover:gap-1" : "hover:gap-3" : ""
+const underline = underlined ? "hover:underline" : ""
 
-const classes = `inline-flex max-w-max items-center gap-2 text-primary ${ animate } transition-all ${extra ?? ""}`
+const classes = `inline-flex max-w-max items-center ${ spacing } ${ underline } text-primary not-prose ${ animate } transition-all ${extra ?? ""}`
 ---
 
 <a

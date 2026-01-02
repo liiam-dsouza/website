@@ -1,0 +1,147 @@
+---
+title: 10 CLI Tools
+description: A practical guide to the CLI tools that form the core of my terminal workflow. This article covers why I use each tool, how I configure them, and how they fit together as part of a cohesive, everyday setup.
+date: 2026-01-10
+type: 📝 Article
+kind: [⚙️ How To, 🛠️ Tooling]
+tags: [⚡ Productivity, 🚀 Workflow, 🖥️ Terminal]
+draft: true
+---
+
+import Figure from "@components/Figure.astro"
+import PullQuote from "@components/PullQuote.astro"
+import CardHeading from "@components/CardHeading.astro"
+import Link from "@components/Link.astro"
+
+
+Over time, my terminal has become one of the most important tools in my daily workflow. This guide breaks down the CLI tools I rely on most, why I use them, and how I’ve configured each one to fit the way I work. Rather than aiming for a one-size-fits-all setup, the focus here is on building a terminal environment that’s fast, expressive, and enjoyable to use.
+
+Along the way, I'll share the reasoning behind my choices, practical configuration examples, and links to my full setup. If you’re looking to refine your own terminal workflow or borrow ideas to adapt into your own environment, this guide is designed to be modular, approachable, and easy to follow.
+
+## Terminal Foundation: Shell & Prompt
+
+My terminal workflow is built on `zsh` (Z Shell), with Powerlevel10k as the prompt theme and Zinit as the plugin manager. This setup gives me a fast, expressive shell environment while keeping configuration modular and startup time under control.
+
+Powerlevel10k provides a highly informative prompt, surfacing useful context such as git status, exit codes, and directory information without becoming visually overwhelming. Zinit handles plugin management and lazy-loading, allowing me to scale my shell configuration without sacrificing performance. This foundation shapes how all other tools behave and render.
+
+## The Tools
+
+The following tools form the core of my day-to-day terminal workflow. Each one solves a specific problem and integrates cleanly with the rest of the setup.
+
+### 1. FZF - A Command-Line Fuzzy Finder
+
+`fzf` is one of the most important tools in my terminal. It provides fast, flexible fuzzy searching over files, command history, git branches, and more.
+
+I use `fzf` heavily in combination with other tools like `fd`, `ripgrep`, and `zoxide` to quickly narrow down results without breaking flow. Small custom keybindings make it easy to invoke in different contexts, turning search into an interactive, low-friction operation.
+
+<Link url="https://github.com/junegunn/fzf" text="Check out FZF on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 2. Bat - A `Cat` Clone with Syntax Highlighting
+
+`bat` replaces `cat` in my workflow, adding syntax highlighting, line numbers, and git integration by default. It’s especially useful when previewing files during fuzzy searches or reviewing configuration files.
+
+Paired with `fzf`, `bat` provides rich previews that make navigating large codebases significantly easier, without needing to open a full editor.
+
+<Link url="https://github.com/sharkdp/bat" text="Check out Bat on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 3. Ripgrep - Fast Search for Code & text
+
+`ripgrep` (`rg`) is my go-to tool for searching through code and text. It’s extremely fast, respects `.gitignore` by default, and works well across large repositories.
+
+I often combine `rg` with `fzf` to create interactive search workflows, allowing me to jump directly from a search result to a specific file or location.
+
+<Link url="https://github.com/BurntSushi/ripgrep" text="Check out Ripgrep on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 4. fd - A Fast, User-Friendly Alternative to `find`
+
+`fd` provides a simpler, more intuitive interface for finding files and directories. It has sensible defaults, better output formatting, and integrates cleanly with other tools.
+
+In practice, `fd` is frequently used as a backend for `fzf`, enabling quick file discovery without memorising complex `find` flags.
+
+<Link url="https://github.com/sharkdp/fd" text="Check out fd on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 5. Zoxide - A Smarter `cd` Command
+
+`zoxide` replaces traditional directory navigation with a smarter, frequency-based approach. Instead of typing long paths, I can jump to commonly used directories with minimal input.
+
+Over time, it learns my habits and becomes faster the more I use it, which pairs particularly well with a keyboard-driven workflow.
+
+<Link url="https://github.com/ajeetdsouza/zoxide" text="Check out Zoxide on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 7. TMUX - Terminal Multiplexer
+
+`tmux` allows me to manage multiple terminal sessions, windows, and panes within a single terminal instance. This is especially useful for long-running processes, remote sessions, or parallel tasks.
+
+My configuration focuses on simple keybindings and predictable layouts, keeping tmux powerful without becoming overwhelming.
+
+```conf title="~/.config/tmux/tmux.conf"
+
+unbind C-b        # Unbind default prefix
+set -g prefix C-s # Change prefix to Ctrl+s
+
+set -g mouse on # Enable mouse support
+
+bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
+
+bind | split-window -h -c "#{pane_current_path}" # Create horizontal split
+bind - split-window -v -c "#{pane_current_path}" # Create vertical split
+```
+
+<Link url="https://github.com/tmux/tmux/wiki/Installing" text="Check out TMUX on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 7. LazyGit - A Git Interface for the Terminal
+
+`lazygit` provides a clean, approachable interface for common Git operations. It’s ideal for visualising changes, staging files, and managing branches without leaving the terminal.
+
+While I’m comfortable with Git on the command line, LazyGit shines when working on larger changesets or reviewing complex diffs.
+
+<Figure
+    src="/images/posts/10-cli-tools/lazygit.png"
+    alt="LazyGit interface showing a git repository status"
+    caption="LazyGit provides a visual way to manage Git repositories from the terminal."
+/>
+
+<Link url="https://github.com/jesseduffield/lazygit" text="Check out LazyGit on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 8. The Fuck (yes, really) - Command-Line Error Correction
+
+`thefuck` is a small quality-of-life tool that suggests corrections for mistyped commands. With a single keystroke, it can fix common errors like missing `sudo` or incorrect flags.
+
+Yes, the name is real - and yes, it’s incredibly useful. Once you start using it, you’ll wonder how you ever typed in the terminal without it.
+
+<PullQuote title="⭐ Tip">
+    I've aliased it so running `fuck` automatically corrects the last command, keeping the workflow frictionless
+</PullQuote>
+
+<Link url="https://github.com/nvbn/thefuck" text="Check out The Fuck on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+### 9. LSD - A Modern Replacement for `ls`
+
+`lsd` replaces `ls` with better defaults, icons, and git-aware output. It improves readability while still behaving predictably in scripts and day-to-day usage.
+
+Combined with a consistent colour scheme and font, it helps make directory listings easier to scan at a glance.
+
+<Link url="https://github.com/lsd-rs/lsd" text="Check out LSD on GitHub" icon={{ name: "arrow-big-right-lines", side: "right" }} target="_blank" animated />
+
+### 10. Shell & Prompt Layer - Zsh + Powerlevel10k
+
+My shell and prompt configuration ties the entire workflow together. Powerlevel10k provides immediate feedback about the current environment, while Zsh features and plugins improve usability and completion.
+
+This layer doesn’t replace individual tools, but enhances how they’re used, surfacing context exactly when it’s needed.
+
+<Link url="https://github.com/romkatv/powerlevel10k" text="Check out Powerlevel10k on GitHub" icon={{ name: "arrow-big-right-lines", side: "right"   }} target="_blank" animated />
+
+## How They Fit Together
+
+The real power of this setup comes from how these tools compose. `fd` and `ripgrep` feed into `fzf`, previews are handled by `bat`, navigation is accelerated by `zoxide`, and everything runs within a tmux-managed environment.
+
+Rather than relying on a single “do everything” tool, this approach focuses on small, composable utilities that work well together and can be swapped out or extended over time.
+
+## Closing
+
+This setup isn’t meant to be prescriptive, but to document the tools and decisions that currently work best for me. If you’re building or refining your own terminal workflow, I’d encourage you to borrow ideas selectively and adapt them to your needs.
+
+<PullQuote title="💡 Related Project">
+    This guide walks though some of the tools and configurations used in my customised terminal setup. You can explore the full project, including my complete config files <Link url="https://github.com/jesseduffield/lazygit" text="here" icon={{ name: "arrow-up-right", side: "right"   }} target="_blank" animated inline class="gap-0" />.
+</PullQuote>
+

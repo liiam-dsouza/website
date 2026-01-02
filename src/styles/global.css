@@ -29,6 +29,10 @@ body {
     font-family: sans-serif, "Noto Color Emoji";
 }
 
+.expressive-code {
+    @apply my-4
+}
+
 @media (prefers-color-scheme: dark) {
     *, ::before, ::after {
         color-scheme: light ! important;
