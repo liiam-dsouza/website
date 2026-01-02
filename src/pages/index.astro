@@ -5,18 +5,14 @@ import Link from "@components/Link.astro"
 import Main from "@layouts/Main.astro"
 import Heading from "@components/Heading.astro"
 import Subheading from "@components/Subheading.astro"
-import Duration from "@components/Duration.astro"
-import Tag from "@components/Tag.astro"
-import { experienceJson } from "@content/experience"
 
 import { getCollection } from "astro:content"
-import { sortTags } from "@/utils/helpers"
-import CardHeading from "@/components/CardHeading.astro"
-import CardDescription from "@/components/CardDescription.astro"
 
-const featuredPosts = (await getCollection("posts")).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 2)
+const featuredPosts = (await getCollection("posts", ({ data }) => {
+    return !data.draft
+})).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 2)
 const featuredProjects = (await getCollection("projects", ({ data }) => {
-    return data.featured === true
+    return data.featured
 })).sort((a, b) => a.data.title.localeCompare(b.data.title))
 ---
 
