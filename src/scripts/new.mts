@@ -24,14 +24,14 @@ const CONFIG = {
     },
 }
 
-if (!CONFIG[type]) {
+if (!(type in CONFIG)) {
     console.error(
         `❌ Unknown type "${type}". Valid types: ${Object.keys(CONFIG).join(", ")}`
     )
     process.exit(1)
 }
 
-const { dir, template } = CONFIG[type]
+const { dir, template } = CONFIG[type as keyof typeof CONFIG]
 
 const filename = `${slug}.mdx`
 const filepath = path.join(dir, filename)

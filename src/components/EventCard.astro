@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content"
+
+import Card from "./Card.astro"
+import CardDescription from "./CardDescription.astro"
+import CardHeading from "./CardHeading.astro"
+import Date from "./Date.astro"
+import Link from "./Link.astro"
+import Image from "./Image.astro"
+import Tag from "./Tag.astro"
+
+interface Props {
+    event: CollectionEntry<"events">
+}
+
+const { event } = Astro.props as Props
+const { cover, coverAlt, title, role, type, date, description } = event.data
+---
+
+<Card>
+    <div>
+        <div class="flex flex-row justify-between items-center pb-2">
+            <span class="my-2"><Tag>{ role }</Tag></span>
+
+            <span class="flex flex-row gap-2">📅<Date date={ date } format="short" /></span>
+        </div>
+        <Image src={ cover } alt={ coverAlt } />
+    </div>
+
+    <span class="my-2 text-lg font-medium">{ title }</span>
+</Card>
