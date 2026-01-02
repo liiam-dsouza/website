@@ -72,32 +72,5 @@ const featuredProjects = (await getCollection("projects", ({ data }) => {
         </div>
         <Link url="/posts" text="Read all writeups" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
     </section>
-
-    {
-        experienceJson.sort((a, b) => b.startDate.getTime() - a.startDate.getTime()).map((experience) => {
-            const start = new Date(experience.startDate)
-            const end = experience.endDate ? new Date(experience.endDate) : new Date()
-            return (
-                <section class="mb-8">
-                    <div class="flex flex-row items-center justify-between">
-                        <CardHeading>{ experience.role }</CardHeading>
-                        <span class="font-semibold"><Duration start={ start } end={ experience.endDate ? end : null } /></span>
-                    </div>
-                    <Subheading>{ experience.company }</Subheading>
-                    <p>
-                        { experience.description }
-                    </p>
-
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        {
-                            sortTags(experience.skills).map((skill) => (
-                                <Tag>{ skill }</Tag>
-                            ))
-                        }
-                    </div>
-                </section>
-            )
-        })
-    }
 </Main>
 
