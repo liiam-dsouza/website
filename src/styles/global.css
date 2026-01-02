@@ -46,3 +46,12 @@ body {
 .active {
     @apply bg-primary text-white;
 }
+
+dialog::backdrop {
+    animation: backdropFade 0.2s ease-out;
+}
+
+@keyframes backdropFade {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}

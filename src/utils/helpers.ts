@@ -48,13 +48,21 @@ export const getTagId = (tag: string): string => {
     return tag.slice(tag.indexOf(" ") + 1)
 }
 
-export const formatTags = (tags: string[]): string[] => {
-    return tags.map(tag => {
+export const formatTags = (tags: string[] | string): string[] => {
+    function processTag(tag: string): string {
         const spaceIndex = tag.indexOf(" ")
         if (spaceIndex === -1) return tag.toUpperCase()
         const emoji = tag.slice(0, spaceIndex)
         const text = tag.slice(spaceIndex + 1).toUpperCase()
         return `${emoji} ${text}`
-    })
+    }
+
+    if (Array.isArray(tags)) {
+        return tags.map(tag => {
+            return processTag(tag)
+        })
+    } else {
+        return [processTag(tags)]
+    }
 }
 

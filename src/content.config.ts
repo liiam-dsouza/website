@@ -52,7 +52,6 @@ const events = defineCollection({
             coverAlt: event.coverAlt,
             title: event.title,
             role: event.role,
-            type: event.type,
             date: event.date,
             description: event.description,
         }))
@@ -61,8 +60,7 @@ const events = defineCollection({
         cover: z.string(),
         coverAlt: z.string(),
         title: z.string(),
-        role: z.string(),
-        type: z.string(),
+        role: z.array(z.string()).or(z.string()),
         date: z.date(),
         description: z.string(),
     }),
