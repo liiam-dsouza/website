@@ -94,8 +94,9 @@ const resources = defineCollection({
     schema: z.object({
         title: z.string(),
         description: z.string(),
-        link: z.string().url(),
+        type: z.string(),
         tags: z.array(z.string()),
+        difficulty: z.string(),
     }),
 })
 

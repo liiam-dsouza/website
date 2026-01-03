@@ -1,5 +1,5 @@
 ---
-import { formatTags, getTagId } from '@utils/helpers'
+import { formatTags, getTagId, slugify } from '@utils/helpers'
 
 interface Props {
     tags: string[]
@@ -17,7 +17,7 @@ console.log(tags)
 
     {
         formatTags(tags).map((tag) => (
-            <button class="filter-btn" data-tag={ getTagId(tag).toLowerCase() } >
+            <button class="filter-btn" data-tag={ slugify(getTagId(tag)) } >
                 { `${ tag }` }
             </button>
         ))
