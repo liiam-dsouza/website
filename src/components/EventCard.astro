@@ -6,6 +6,7 @@ import Date from "./Date.astro"
 import Image from "./Image.astro"
 import Tag from "./Tag.astro"
 import { formatTags } from "@utils/helpers"
+import { Icon } from "astro-icon/components"
 
 interface Props {
     event: CollectionEntry<"events">
@@ -20,7 +21,7 @@ const dialogId = `talk-${`${ title + role }`.toLowerCase().replace(/\s+/g, '-')}
 <article class="group relative">
     <button
         type="button"
-        class="w-full text-left focus:rounded-lg"
+        class="w-full text-left focus:rounded-2xl"
         aria-haspopup="dialog"
         aria-controls={dialogId}
         onclick={`document.getElementById('${dialogId}').showModal()`}
@@ -41,16 +42,16 @@ const dialogId = `talk-${`${ title + role }`.toLowerCase().replace(/\s+/g, '-')}
 
 <dialog
   id={dialogId}
-  class="m-auto w-full max-w-2xl rounded-xl border border-neutral-200 bg-white p-0 shadow-xl backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+  class="m-auto w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xl border border-neutral-200 bg-white p-0 shadow-xl backdrop:bg-black/70 backdrop:backdrop-blur-sm"
 >
   <!-- Close -->
   <button
     type="button"
     aria-label="Close"
-    class="absolute right-4 top-4 rounded-md bg-neutral-900/70 px-2 py-1 text-xl text-white hover:bg-neutral-900"
+    class="absolute right-4 top-4 rounded-lg bg-neutral-900/70 p-2 text-xl text-white hover:bg-neutral-900/80 transition-all duration-100 ease-in-out hover:scale-95"
     onclick={`document.getElementById('${dialogId}').close()`}
   >
-    ×
+    <Icon name="tabler:x" />
   </button>
 
   <!-- Modal image -->
@@ -63,7 +64,7 @@ const dialogId = `talk-${`${ title + role }`.toLowerCase().replace(/\s+/g, '-')}
   <!-- Modal content -->
   <div class="space-y-4 p-6">
     <h2 class="text-xl font-semibold text-neutral-900">
-      {title}
+        {title}
     </h2>
 
     <div class="my-2 flex flex-wrap gap-2">
@@ -78,10 +79,8 @@ const dialogId = `talk-${`${ title + role }`.toLowerCase().replace(/\s+/g, '-')}
         📅 <Date date={ date } format="long" />
     </p>
 
-    {description && (
-      <p class="text-neutral-700">
-        {description}
-      </p>
-    )}
+    <p class="text-neutral-700">
+        { description }
+    </p>
   </div>
 </dialog>
