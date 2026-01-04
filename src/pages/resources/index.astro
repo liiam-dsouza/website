@@ -6,13 +6,7 @@ import Link from "@/components/Link.astro"
 import Card from "@/components/Card.astro"
 import { formatTags } from "@/utils/helpers"
 
-const learningPaths = [
-    {
-        title: "Get Started with Web Development",
-        description: "A practical introduction to building for the web, focused on understanding how things fit together rather than memorising frameworks.",
-
-    }
-]
+import { getCollection } from "astro:content"
 
 const recommendations = [
     {
@@ -58,6 +52,8 @@ const recommendations = [
         tags: ["⚡ Productivity", "🛠️ Programming Tools"]
     }
 ]
+
+const learningPaths = await getCollection("resources", ({ data }) => data.type === "🧭 Learning Path")
 ---
 
 <Main title="Resources" description="View my resources, including open-source projects, tutorials, and useful links I've compiled.">
@@ -71,6 +67,10 @@ const recommendations = [
         <p>
             Whether you're here after a workshop, exploring a topic on your own, or just curious, these resources are designed to be practical, approachable, and easy to come back to.
         </p>
+
+        <p>
+            More content to come soon - stay tuned!
+        </p>
     </section>
 
     <section id="learning-paths" class="flex flex-col gap-y-2 mb-8">
@@ -78,9 +78,37 @@ const recommendations = [
         <p>
             If you're new to a topic or unsure where to start, these learning paths offer a short, structured way in. Each path is intentionally lightweight, with a small number of hand-picked resources and brief context on why they matter.
         </p>
+
+        <div class="grid md:grid-cols-3 gap-4 my-2">
+            {
+                learningPaths.map((path) => {
+                    return (
+                        <Card link={ `/resources/${ path.id }` }>
+                            <article>
+                                <h4 class="text-xl font-semibold mt-2">{ path.data.title }</h4>
+                                <p class="mt-2">
+                                    { path.data.description }
+                                </p>
+                                <div class="mt-4">
+                                    <Link url={ `/resources/${ path.id }` } text="Explore learning path" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+                                </div>
+
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    {
+                                        formatTags(path.data.tags).sort().map((tag) => (
+                                            <Tag>{ `${ tag }` }</Tag>
+                                        ))
+                                    }
+                                </div>
+                            </article>
+                        </Card>
+                    )
+                })
+            }
+        </div>
     </section>
 
-    <section id="tools-software" class="flex flex-col gap-y-2 mb-8">
+    <!-- <section id="tools-software" class="flex flex-col gap-y-2 mb-8">
         <h3 class="text-2xl font-medium">🛠️ Tools & Software I Use</h3>
         <p>
             These are tools I actively use or recommend - not because they're trendy, but because they've proven useful in real projects, workshops, and everyday workflows.
@@ -102,7 +130,7 @@ const recommendations = [
         <p>
             If you attended a session, this is a good place to revisit materials. If you didn't, many of these resources still stand on their own.
         </p>
-    </section>
+    </section> -->
 
     <section id="recommended-read-watch" class="flex flex-col gap-y-2 mb-8">
         <h3 class="text-2xl font-medium">🔗 Recommended Reading & Watching</h3>

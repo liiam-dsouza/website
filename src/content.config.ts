@@ -2,8 +2,8 @@ import { defineCollection } from "astro:content"
 import { glob } from "astro/loaders"
 import { z } from "astro/zod"
 
-import { eventsJson } from "@content/events"
-import { experienceJson } from "@content/experience"
+import { eventsJson } from "@content/events.ts"
+import { experienceJson } from "@content/experience.ts"
 
 
 const posts = defineCollection({

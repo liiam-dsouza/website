@@ -1,16 +1,15 @@
 import { defineConfig } from "astro/config"
 import tailwindcss from "@tailwindcss/vite"
 import lottie from "astro-integration-lottie"
-import catppuccin from "@catppuccin/starlight";
 
 
-import icon from "astro-icon";
+import icon from "astro-icon"
 
-import mdx from "@astrojs/mdx";
+import mdx from "@astrojs/mdx"
 
-import sitemap from "@astrojs/sitemap";
+import sitemap from "@astrojs/sitemap"
 
-import expressiveCode from "astro-expressive-code";
+import expressiveCode from "astro-expressive-code"
 
 export default defineConfig({
     vite: {
