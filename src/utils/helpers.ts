@@ -66,3 +66,12 @@ export const formatTags = (tags: string[] | string): string[] => {
     }
 }
 
+export const slugify = (input: string): string => {
+    return input
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "") // remove non-word characters
+        .replace(/\s+/g, "-")     // spaces → dashes
+        .replace(/-+/g, "-")      // collapse multiple dashes
+}
+

@@ -1,10 +1,149 @@
 ---
 import Heading from "@/components/Heading.astro"
-import Subheading from "@/components/Subheading.astro"
 import Main from "@layouts/Main.astro"
+import Tag from "@/components/Tag.astro"
+import Link from "@/components/Link.astro"
+import Card from "@/components/Card.astro"
+import { formatTags } from "@/utils/helpers"
+
+const learningPaths = [
+    {
+        title: "Get Started with Web Development",
+        description: "A practical introduction to building for the web, focused on understanding how things fit together rather than memorising frameworks.",
+
+    }
+]
+
+const recommendations = [
+    {
+        title: "Network Chuck",
+        type: "🎬 YouTube Channel",
+        link: "https://www.youtube.com/@NetworkChuck",
+        description: "Great tutorials and explanations on networking, cloud computing, and various IT topics.",
+        tags: ["🛜 Networking", "☁️ Cloud"]
+    },
+    {
+        title: "W3Schools",
+        type: "🌐 Website",
+        link: "https://www.w3schools.com/",
+        description: "A comprehensive resource for learning web technologies, including HTML, CSS, JavaScript, and more.",
+        tags: ["🌐 Web Development"]
+    },
+    {
+        title: "Eloquent JavaScript",
+        type: "📚 Book",
+        link: "https://eloquentjavascript.net/",
+        description: "A modern introduction to programming using JavaScript, covering both basic and advanced topics.",
+        tags: ["💻 Programming", "🌐 Web Development", "🟨 JavaScript"]
+    },
+    {
+        title: "Dreams of Code",
+        type: "🎬 Youtube Channel",
+        link: "https://www.youtube.com/@DreamsOfCode",
+        description: "Computer Science, Software Engineering, Development and Programming Tutorials.",
+        tags: ["💻 Programming", "⚙️ Software Engineering"]
+    },
+    {
+        title: "Why Language Models Hallucinate",
+        type: "📝 Article",
+        link: "https://openai.com/index/why-language-models-hallucinate/",
+        description: "An in-depth look at why large language models sometimes produce incorrect or nonsensical information.",
+        tags: ["🤖 AI", "🧠 Machine Learning"]
+    },
+    {
+        title: "typecraft",
+        type: "🎬 YouTube Channel",
+        link: "https://www.youtube.com/@typecraft_dev",
+        description: "Videos on how to master modern programming tools, workflows, and productivity setups.",
+        tags: ["⚡ Productivity", "🛠️ Programming Tools"]
+    }
+]
 ---
 
 <Main title="Resources" description="View my resources, including open-source projects, tutorials, and useful links I've compiled.">
-    <h1>Resources coming soon...</h1>
+    <section id="resources-hero" class="flex flex-col gap-y-2 mb-8">
+        <Heading>📂 Resources</Heading>
+        <p>
+            I've learned a lot through building, teaching, and exploring - often by standing on the shoulders of great tools, ideas, and people.
+            This page is a curated collection of resources I regularly recommend, use, or create myself.
+        </p>
+
+        <p>
+            Whether you're here after a workshop, exploring a topic on your own, or just curious, these resources are designed to be practical, approachable, and easy to come back to.
+        </p>
+    </section>
+
+    <section id="learning-paths" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">🧭 Learning Paths</h3>
+        <p>
+            If you're new to a topic or unsure where to start, these learning paths offer a short, structured way in. Each path is intentionally lightweight, with a small number of hand-picked resources and brief context on why they matter.
+        </p>
+    </section>
+
+    <section id="tools-software" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">🛠️ Tools & Software I Use</h3>
+        <p>
+            These are tools I actively use or recommend - not because they're trendy, but because they've proven useful in real projects, workshops, and everyday workflows.
+        </p>
+
+        <p>
+            Where relevant, I've included brief notes on how I use each tool or what makes it stand out.
+        </p>
+
+
+    </section>
+
+    <section id="workshop-resources" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">📚 Workshop Resources</h3>
+        <p>
+            Resources from workshops and sessions I've run or contributed to. These are designed to be practical, reusable, and beginner-friendly.
+        </p>
+
+        <p>
+            If you attended a session, this is a good place to revisit materials. If you didn't, many of these resources still stand on their own.
+        </p>
+    </section>
+
+    <section id="recommended-read-watch" class="flex flex-col gap-y-2 mb-8">
+        <h3 class="text-2xl font-medium">🔗 Recommended Reading & Watching</h3>
+        <p>
+            A curated selection of articles, talks, and papers that have shaped how I think about technology, learning, and building.
+        </p>
+
+        <p>
+            This isn’t an exhaustive list - just things I genuinely return to or frequently recommend.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-4">
+            {
+                recommendations.sort(
+                    (a, b) => a.title.localeCompare(b.title)
+                ).map((item) => {
+                    return (
+                        <Card>
+                            <article>
+                                <Tag>{ item.type.toUpperCase() }</Tag>
+                                <h4 class="text-xl font-semibold mt-2">{ item.title }</h4>
+                                <p>
+                                    { item.description }
+                                </p>
+                                <div class="mt-2">
+                                    <Link url={ item.link } text="View" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+                                </div>
+
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    {
+                                        formatTags(item.tags).sort().map((tag) => (
+                                            <Tag>{ `${ tag }` }</Tag>
+                                        ))
+                                    }
+                                </div>
+                            </article>
+                        </Card>
+                    )
+                })
+            }
+        </div>
+    </section>
 </Main>
 

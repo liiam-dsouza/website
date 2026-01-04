@@ -13,7 +13,6 @@ const allProjects = (await getCollection("projects")).sort((a, b) => a.data.titl
 
 <Main title="Projects" description="A showcase of my software projects, ranging from personal experiments to university projects.">
     <section id="all-projects" class="mb-8">
-        <div class="mb-4"><Link url="/" text="Go back home" icon={{ name: "arrow-big-left-lines", side: "left" }} animated /></div>
         <Heading>🛠️ Projects</Heading>
         <Subheading>These are projects I’ve worked on - a mix of university coursework, personal experiments, and exploratory builds. I'm particularly interested in how decisions are made: trade-offs, constraints, and how systems evolve over time.</Subheading>
         <ProjectFilter projects={allProjects} />

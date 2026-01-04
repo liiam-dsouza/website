@@ -4,7 +4,7 @@ import "@styles/global.css"
 import type { CollectionEntry } from "astro:content"
 import PostCard from "./PostCard.astro"
 import TagButtons from "./TagButtons.astro"
-import { getTagId } from "@utils/helpers"
+import { getTagId, slugify } from "@utils/helpers"
 import Filter from "./Filter.astro"
 
 interface Props {
@@ -28,7 +28,7 @@ const types = Array.from(
             posts.map((post) => {
                 const { type } = post.data
                 return (
-                    <article class="card" data-tags={ getTagId(type).toLowerCase() } >
+                    <article class="card" data-tags={ slugify(getTagId(type)) } >
                         <PostCard post={ post } />
                     </article>
                 )

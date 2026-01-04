@@ -17,7 +17,7 @@ const featuredProjects = (await getCollection("projects", ({ data }) => {
 ---
 
 <Main title="Home" description="View my website that showcases my projects, resources, and writeups.">
-    <section id="welcome" class="flex flex-col gap-y-2 mb-8">
+    <section id="welcome" class="flex flex-col gap-y-2 mb-12">
         <Heading>👋 Hello!</Heading>
         <p>
             I'm Liam D'Souza, a fourth-year software engineering student at the Queensland University of Technology.
@@ -32,7 +32,7 @@ const featuredProjects = (await getCollection("projects", ({ data }) => {
         </p>
     </section>
 
-    <section id="featured-projects" class="mb-8">
+    <section id="featured-projects" class="mb-12">
         <Heading>🛠️ Featured Projects</Heading>
         <Subheading>A selection of projects where I’ve focused on clarity, maintainability, and good developer experience.</Subheading>
         <div class="grid md:grid-cols-2 gap-4 my-4">
@@ -47,7 +47,7 @@ const featuredProjects = (await getCollection("projects", ({ data }) => {
         <Link url="/projects" text="View all projects" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
     </section>
 
-    <section id="popular-resources" class="mb-8">
+    <section id="popular-resources" class="mb-12">
         <Heading>📂 Popular Resources</Heading>
         <Subheading>A selection of frequently used resources I use in the talks and workshops I deliver.</Subheading>
         <div class="grid md:grid-cols-2 gap-4 my-4">
@@ -56,7 +56,7 @@ const featuredProjects = (await getCollection("projects", ({ data }) => {
         <Link url="#" text="Explore resources" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
     </section>
 
-    <section id="latest-writeups" class="mb-8">
+    <section id="latest-writeups" class="mb-12">
         <Heading>✏️ Latest Writeups</Heading>
         <Subheading>Writing that ranges from technical deep dives to reflective pieces on events and experiences that shaped how I work.</Subheading>
         <div class="grid md:grid-cols-2 gap-4 my-4">
