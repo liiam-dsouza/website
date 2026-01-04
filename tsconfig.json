@@ -2,7 +2,21 @@
     "extends": "astro/tsconfigs/strict",
     "include": [".astro/types.d.ts", "**/*"],
     "exclude": ["dist"],
+
     "compilerOptions": {
+        /* ESM + Node compatibility */
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+
+        /* Output */
+        "outDir": "dist",
+        "target": "ES2022",
+
+        /* Quality-of-life */
+        "verbatimModuleSyntax": true,
+        "resolveJsonModule": true,
+
+        /* Paths */
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"],
