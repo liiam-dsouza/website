@@ -1,6 +1,4 @@
 ---
-import "@styles/global.css"
-
 import type { CollectionEntry } from "astro:content"
 import PostCard from "./PostCard.astro"
 import TagButtons from "./TagButtons.astro"
@@ -12,7 +10,7 @@ interface Props {
 }
 
 const { posts } = Astro.props as Props
-const types = Array.from(
+const tags = Array.from(
     new Set(
         posts
         .map((post) => post.data.type)
