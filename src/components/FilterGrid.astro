@@ -1,0 +1,46 @@
+---
+import { getTagId } from "@/utils/helpers"
+import { type CollectionKey, getCollection } from "astro:content"
+import Filter from "./Filter.astro"
+import ProjectCard from "./ProjectCard.astro"
+import PostCard from "./PostCard.astro"
+import TagButtons from "./TagButtons.astro"
+
+interface Props {
+    collection: string
+    tags: string[]
+    sortBy?: "date" | "title"
+    order?: "asc" | "desc"
+    filterDrafts?: boolean
+}
+
+const { collection, tags, sortBy, order, filterDrafts } = Astro.props as Props
+const items = await getCollection(collection as CollectionKey)
+
+console.log(items)
+---
+
+<section>
+    <TagButtons tags={ tags } />
+
+    <div class="grid md:grid-cols-2 gap-6">
+        {
+            items.map((item) => {
+                const { category } = item.data
+                return (
+                    <article class="card" data-tags={getTagId(category).toLowerCase()} >
+                        {
+                            collection === "posts" ? <PostCard post={ item.data } /> : null
+                        }
+                        {
+                            collection === "projects" ? <ProjectCard project={ item.data } /> : null
+                        }
+                    </article>
+                )
+            })
+        }
+    </div>
+</section>
+
+<Filter />
+

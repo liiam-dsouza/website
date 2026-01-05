@@ -4,7 +4,9 @@ import Main from "@layouts/Main.astro"
 import Tag from "@/components/Tag.astro"
 import Link from "@/components/Link.astro"
 import Card from "@/components/Card.astro"
-import { formatTags } from "@/utils/helpers"
+import CardHeading from "@/components/CardHeading.astro"
+import CardDescription from "@/components/CardDescription.astro"
+import { formatTags, sortTags } from "@/utils/helpers"
 
 import { getCollection } from "astro:content"
 
@@ -85,7 +87,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
                     return (
                         <Card link={ `/resources/${ path.id }` }>
                             <article>
-                                <h4 class="text-xl font-semibold mt-2">{ path.data.title }</h4>
+                                <CardHeading>{ path.data.title }</CardHeading>
                                 <p class="mt-2">
                                     { path.data.description }
                                 </p>
@@ -95,7 +97,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
 
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     {
-                                        formatTags(path.data.tags).sort().map((tag) => (
+                                        sortTags(formatTags(path.data.tags)).map((tag) => (
                                             <Tag>{ `${ tag }` }</Tag>
                                         ))
                                     }
