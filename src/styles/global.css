@@ -47,6 +47,10 @@ body {
     @apply bg-primary text-white;
 }
 
+.hover {
+    @apply hover:-translate-y-1 hover:scale-105 hover:shadow-black/10 hover:shadow-lg
+}
+
 dialog::backdrop {
     animation: backdropFade 0.2s ease-out;
 }

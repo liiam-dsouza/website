@@ -1,4 +1,6 @@
 ---
+import Date from "./Date.astro"
+
 interface Props {
     start: Date
     end: Date | null
@@ -14,8 +16,25 @@ const endYear = end ? end.getUTCFullYear() : null
 {
     startYear == endYear ? startYear : (
         <>
-        {startYear} –{" "}
-        { !current && end ? endYear : "Present" }
+            <Date
+                date={start}
+                options={{
+                    year: "numeric",
+                    month: "short",
+                }}
+            />
+        –{" "}
+        { !current && end ?
+            (
+                <Date
+                    date={end}
+                    options={{
+                        year: "numeric",
+                        month: "short",
+                    }}
+                />
+            )
+        : "Present" }
         </>
     )
 }

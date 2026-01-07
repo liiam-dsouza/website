@@ -1,45 +1,31 @@
 ---
 import { experienceJson } from "@content/experience"
 import { sortTags } from "@utils/helpers"
-import CardHeading from "./CardHeading.astro"
 import Duration from "./Duration.astro"
 import Subheading from "./Subheading.astro"
 import Tag from "./Tag.astro"
+import { getCollection } from "astro:content"
 
-interface ExperienceItem {
-  role: string
-  company: string
-  startDate: string
-  endDate: string | null
-  description: string
-  skills?: string[]
-}
-
-interface Props {
-  items: ExperienceItem[]
-}
-
-const { items } = Astro.props as Props
+const experience = (await getCollection("experience")).sort((a, b) =>
+    b.data.startDate.getTime() - a.data.startDate.getTime()
+)
 ---
 
 {
-    experienceJson.sort((a, b) => b.startDate.getTime() - a.startDate.getTime()).map((experience) => {
-        const start = new Date(experience.startDate)
-        const end = experience.endDate ? new Date(experience.endDate) : new Date()
+    experience.map((experience) => {
+        const { startDate, endDate, role, company, description, skills } = experience.data
         return (
-            <section class="mb-8">
+            <section class="my-2">
                 <div class="flex flex-row items-center justify-between">
-                    <CardHeading>{ experience.role }</CardHeading>
-                    <span class="font-semibold"><Duration start={ start } end={ experience.endDate ? end : null } /></span>
+                    <h3 class="text-xl font-medium">{ role }</h3>
+                    <span class="font-semibold"><Duration start={ startDate } end={ endDate } /></span>
                 </div>
-                <Subheading>{ experience.company }</Subheading>
-                <p>
-                    { experience.description }
-                </p>
+                <Subheading>{ company }</Subheading>
+                {/* <p>{ description }</p> */}
 
                 <div class="mt-4 flex flex-wrap gap-2">
                     {
-                        sortTags(experience.skills).map((skill) => (
+                        sortTags(skills).map((skill) => (
                             <Tag>{ skill }</Tag>
                         ))
                     }

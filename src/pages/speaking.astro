@@ -2,8 +2,13 @@
 import EventCard from "@components/EventCard.astro"
 import Heading from "@components/Heading.astro"
 import Main from "@layouts/Main.astro"
+import Date from "@/components/Date.astro"
 
 import { getCollection } from "astro:content"
+import Subheading from "@/components/Subheading.astro"
+import { sortTags } from "@/utils/helpers"
+import Tag from "@/components/Tag.astro"
+import Image from "@/components/Image.astro"
 
 const allEvents = (await getCollection("events")).sort((a, b) =>
     b.data.date.getTime() - a.data.date.getTime()
@@ -86,11 +91,14 @@ const allEvents = (await getCollection("events")).sort((a, b) =>
             These range from technical deep dives and introductory workshops to panel facilitation and event hosting in student and developer-focused spaces.
         </p>
 
-        <div class="grid md:grid-cols-4 gap-4 my-4">
+        <div class="grid md:grid-cols-3 gap-4 my-4">
             {
-                allEvents.map((event) => (
-                    <EventCard event={ event } />
-                ))
+                allEvents.map((event) => {
+                    return (
+                        // <Image src={ cover } alt={ coverAlt } />
+                        <EventCard event={ event } />
+                    )
+                })
             }
     </section>
 </Main>

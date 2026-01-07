@@ -1,0 +1,55 @@
+---
+import { withBase, formatTags } from "@/utils/helpers"
+
+import Image from "@/components/Image.astro"
+import Link from "@/components/Link.astro"
+import Tag from "@/components/Tag.astro"
+import Duration from "@/components/Duration.astro"
+
+interface Props {
+    collection: string
+    id: string
+    title: string
+    description: string
+    tags: string[]
+    type: string
+    start?: Date
+    end?: Date
+    cover?: string
+    coverAlt?: string
+    status?: string
+}
+
+const { collection, id, title, description, tags, type, start, end = null, cover, coverAlt, status } = Astro.props as Props
+---
+<div class="flex flex-col border border-neutral-200 hover:border-primary rounded-2xl p-4 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-black/10 hover:shadow-lg transition-all duration-200 ease-in-out cursor-default">
+    <div class="flex flex-row justify-between items-center pb-2">
+        <span class="my-2"><Tag>{ type }</Tag></span>
+
+        <div class="flex items-center gap-2 my-2 font-semibold">
+            {
+                start && <Duration start={ start } end={ end } current={ end ? true : false} />
+            }
+        </div>
+    </div>
+    {
+        cover && coverAlt && <Image src={ cover } alt={ coverAlt } />
+    }
+    <div class="flex flex-col mt-2">
+        <div class="mb-2">
+            <h3 class="text-xl font-medium">{ title }</h3>
+            { status && <span class="text-sm italic text-primary font-medium">[{ status }]</span> }
+            <p class="text-neutral-500 my-1">{ description }</p>
+        </div>
+
+        <Link url={ withBase(`${ collection }/${ id }`) } text="Explore project" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+
+        <div class="mt-8 flex flex-wrap gap-2">
+            {
+                formatTags(tags).sort().map((tag) => (
+                    <Tag>{ `${ tag }` }</Tag>
+                ))
+            }
+        </div>
+    </div>
+</div>

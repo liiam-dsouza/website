@@ -1,0 +1,132 @@
+---
+import { getTagId, slugify } from "@/utils/helpers"
+import { type CollectionEntry, type CollectionKey, getCollection } from "astro:content"
+import Filter from "./Filter.astro"
+import TagButtons from "./TagButtons.astro"
+import ContentCard from "./ContentCard.astro"
+
+type PostProps = {
+    collection: "posts"
+    filter?: (item: CollectionEntry<"posts">) => boolean
+    buttons?: boolean
+    sort?: (
+        a: CollectionEntry<"posts">,
+        b: CollectionEntry<"posts">
+    ) => number
+    slice?: [number, number]
+}
+
+type ProjectProps = {
+    collection: "projects"
+    buttons?: boolean
+    filter?: (item: CollectionEntry<"projects">) => boolean
+    sort?: (
+        a: CollectionEntry<"projects">,
+        b: CollectionEntry<"projects">
+    ) => number
+    slice?: [number, number]
+}
+
+type Props = PostProps | ProjectProps
+
+const props = Astro.props as Props
+const items = await getCollection(props.collection as CollectionKey)
+
+let posts: CollectionEntry<"posts">[] = []
+let projects: CollectionEntry<"projects">[] = []
+let tags: string[] = []
+
+if (props.collection === "posts") {
+    posts = items
+        .filter(
+        (item): item is CollectionEntry<"posts"> =>
+            item.collection === "posts"
+        )
+        .filter(post => (props.filter ? props.filter(post) : true))
+        .sort(props.sort)
+    if (props.slice) {
+        const [start, end] = props.slice
+        posts = posts.slice(start, end)
+    }
+    tags = Array.from(
+        new Set(
+            posts
+            .map((post) => post.data.type)
+            .filter(Boolean)
+        )
+    )
+}
+
+if (props.collection === "projects") {
+    projects = items
+        .filter(
+        (item): item is CollectionEntry<"projects"> =>
+            item.collection === "projects"
+        )
+        .filter(project => (props.filter ? props.filter(project) : true))
+        .sort(props.sort)
+    if (props.slice) {
+        const [start, end] = props.slice
+        projects = projects.slice(start, end)
+    }
+    tags = Array.from(
+        new Set(
+            projects
+            .map((project) => project.data.category)
+            .filter(Boolean)
+        )
+    )
+}
+---
+
+<section>
+    { props.buttons && <TagButtons tags={ tags } /> }
+
+    <div class="grid md:grid-cols-2 gap-6 my-4">
+        {
+            props.collection === "posts" &&
+            posts.map(post => (
+                <article
+                    class="card"
+                    data-tags={ slugify(getTagId(post.data.type)) }
+                >
+                    {/* <PostCard post={post} /> */}
+                    <ContentCard
+                        collection="posts"
+                        id={post.id}
+                        title={post.data.title}
+                        description={post.data.description}
+                        tags={post.data.tags}
+                        type={post.data.type}
+                    />
+                </article>
+            ))
+        }
+        {
+            props.collection === "projects" &&
+            projects.map(project => (
+                <article
+                    class="card"
+                    data-tags={ slugify(getTagId(project.data.category)) }
+                >
+                    <ContentCard
+                        collection="projects"
+                        id={project.id}
+                        title={project.data.title}
+                        description={project.data.description}
+                        tags={project.data.tags}
+                        type={project.data.category}
+                        start={new Date(project.data.startDate)}
+                        end={project.data.endDate ? new Date(project.data.endDate) : undefined}
+                        cover={project.data.cover}
+                        coverAlt={project.data.coverAlt}
+                        status={project.data.status}
+                    />
+                </article>
+            ))
+        }
+    </div>
+</section>
+
+{ props.buttons && <Filter /> }
+

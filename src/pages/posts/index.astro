@@ -2,30 +2,21 @@
 import Main from "@layouts/Main.astro"
 import Heading from "@components/Heading.astro"
 import Subheading from "@components/Subheading.astro"
-import PostFilter from "@components/PostFilter.astro"
-
-import { getCollection } from "astro:content"
-
-const allPosts = (await getCollection("posts", ({ data }) => {
-    return !data.draft
-})).sort((a, b) =>
-    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-)
-
-const tags = Array.from(
-    new Set(
-        allPosts
-        .map((post) => post.data.type)
-        .filter(Boolean)
-    )
-)
+import ContentGrid from "@/components/ContentGrid.astro"
+import type { CollectionEntry } from "astro:content"
 ---
 
 <Main title="Posts" description="Read my latest writeups on software engineering, technology, and more.">
     <section id="all-posts" class="mb-8">
         <Heading>✏️ Writeups</Heading>
         <Subheading>Writing that ranges from technical deep dives to reflective pieces on events and experiences that shaped how I work.</Subheading>
-        <PostFilter posts={allPosts} />
+        <ContentGrid
+            collection="posts"
+            filter={(post: CollectionEntry<"posts">) => !post.data.draft}
+            sort={(a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
+                b.data.date.getTime() - a.data.date.getTime()
+            }
+        />
     </section>
 </Main>
 
