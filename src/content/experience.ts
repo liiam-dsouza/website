@@ -12,7 +12,7 @@ export const experienceJson = [
         "company": "Queensland Universiy of Technology",
         "startDate": new Date("2025-06-01"),
         "endDate": null,
-        "description": "Delivered hands-on STEM outreach for local high schools, introducing students to QUT engineering degrees and study pathways.",
+        "description": "As a Student Ambassador with the QUT Faculty of Engineering I help to develop and run STEM workshops and presentations for local high school students. This includes highlighting the different degrees and majors we have available at the university for prospective students graduating high school soon. I also assist in representing QUT at various events, providing insights into student life and academic opportunities at QUT.",
         "skills": ["🎤 Public Speaking", "🎓 Teaching", "👥 Leadership"]
     },
     {

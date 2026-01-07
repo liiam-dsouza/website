@@ -1,16 +1,16 @@
 ---
 interface Props {
     date: Date
-    format: "long" | "medium" | "short"
+    options ?: Intl.DateTimeFormatOptions
 }
 
-const { date, format } = Astro.props as Props
+const { date, options } = Astro.props as Props
 ---
 
 <time datetime={ date.toISOString() } class="text-sm">
     {
         date.toLocaleDateString(undefined, {
-            dateStyle: format,
+            ...options,
             timeZone: "UTC",
         })
     }

@@ -3,9 +3,6 @@ import Heading from "@/components/Heading.astro"
 import Main from "@layouts/Main.astro"
 import Tag from "@/components/Tag.astro"
 import Link from "@/components/Link.astro"
-import Card from "@/components/Card.astro"
-import CardHeading from "@/components/CardHeading.astro"
-import CardDescription from "@/components/CardDescription.astro"
 import { formatTags, sortTags } from "@/utils/helpers"
 
 import { getCollection } from "astro:content"
@@ -85,9 +82,9 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
             {
                 learningPaths.map((path) => {
                     return (
-                        <Card link={ `/resources/${ path.id }` }>
+                        <div class="flex flex-col border border-neutral-200 hover:border-primary rounded-2xl p-4 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-black/10 hover:shadow-lg transition-all duration-200 ease-in-out cursor-default">
                             <article>
-                                <CardHeading>{ path.data.title }</CardHeading>
+                                <h3 class="text-xl font-medium">{ path.data.title }</h3>
                                 <p class="mt-2">
                                     { path.data.description }
                                 </p>
@@ -103,7 +100,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
                                     }
                                 </div>
                             </article>
-                        </Card>
+                        </div>
                     )
                 })
             }
@@ -150,7 +147,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
                     (a, b) => a.title.localeCompare(b.title)
                 ).map((item) => {
                     return (
-                        <Card>
+                        <div class="flex flex-col border border-neutral-200 hover:border-primary rounded-2xl p-4 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-black/10 hover:shadow-lg transition-all duration-200 ease-in-out cursor-default">
                             <article>
                                 <Tag>{ item.type.toUpperCase() }</Tag>
                                 <h4 class="text-xl font-semibold mt-2">{ item.title }</h4>
@@ -169,7 +166,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
                                     }
                                 </div>
                             </article>
-                        </Card>
+                        </div>
                     )
                 })
             }

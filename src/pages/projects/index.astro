@@ -2,20 +2,22 @@
 import Main from "@layouts/Main.astro"
 import Heading from "@components/Heading.astro"
 import Subheading from "@components/Subheading.astro"
-import ProjectFilter from "@components/ProjectFilter.astro"
-import Link from "@/components/Link.astro"
 
-import { getCollection } from "astro:content"
-
-
-const allProjects = (await getCollection("projects")).sort((a, b) => a.data.title.localeCompare(b.data.title))
+import { type CollectionEntry } from "astro:content"
+import ContentGrid from "@/components/ContentGrid.astro"
 ---
 
 <Main title="Projects" description="A showcase of my software projects, ranging from personal experiments to university projects.">
     <section id="all-projects" class="mb-8">
         <Heading>🛠️ Projects</Heading>
         <Subheading>These are projects I’ve worked on - a mix of university coursework, personal experiments, and exploratory builds. I'm particularly interested in how decisions are made: trade-offs, constraints, and how systems evolve over time.</Subheading>
-        <ProjectFilter projects={allProjects} />
+        <ContentGrid
+            collection="projects"
+            sort={(a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
+                a.data.title.localeCompare(b.data.title)
+            }
+            buttons
+        />
     </section>
 </Main>
 
