@@ -18,7 +18,7 @@ const dialogId = `talk-${`${ title }`.toLowerCase().replace(/\s+/g, '-')}`
 ---
 
 <article class="group relative">
-    <button type="button" class="w-full text-left focus:rounded-xl" aria-haspopup="dialog" aria-controls={ dialogId } onclick={`document.getElementById('${ dialogId }').showModal()`} >
+    <button type="button" class="w-full text-left hover focus:rounded-xl transition-all duration-200" aria-haspopup="dialog" aria-controls={ dialogId } onclick={`document.getElementById('${ dialogId }').showModal()`} >
         <Image src={ cover } alt={ coverAlt } />
     </button>
 </article>

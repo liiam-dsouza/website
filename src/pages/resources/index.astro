@@ -3,9 +3,10 @@ import Heading from "@/components/Heading.astro"
 import Main from "@layouts/Main.astro"
 import Tag from "@/components/Tag.astro"
 import Link from "@/components/Link.astro"
-import { formatTags, sortTags } from "@/utils/helpers"
+import { formatTags, stripEmojiLabel } from "@/utils/helpers"
 
-import { getCollection } from "astro:content"
+import { getCollection, type CollectionEntry } from "astro:content"
+import ContentGrid from "@/components/ContentGrid.astro"
 
 const recommendations = [
     {
@@ -52,11 +53,48 @@ const recommendations = [
     }
 ]
 
-const learningPaths = await getCollection("resources", ({ data }) => data.type === "🧭 Learning Path")
+const tools = [
+    {
+        name: "Visual Studio Code",
+        link: "https://code.visualstudio.com/",
+        description: "A powerful, extensible code editor with a rich ecosystem of plugins and features.",
+        tags: ["💻 Code Editor", "⚙️ Development"]
+    },
+    {
+        name: "GitHub",
+        link: "https://github.com/",
+        description: "A platform for version control and collaboration, allowing developers to host and review code.",
+        tags: ["🌐 Version Control", "🤝 Collaboration"]
+    },
+    {
+        name: "Ghostty",
+        link: "https://ghostty.org/",
+        description: "A fast and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.",
+        tags: ["🖥️ Terminal Emulator", "⚡ Performance"],
+    },
+    {
+        name: "Docker",
+        link: "https://www.docker.com/",
+        description: "A platform designed to help developers build, share, and run container applications",
+        tags: ["🐳 Containerisation", "⚙️ DevOps"],
+    },
+    {
+        name: "PNPM",
+        link: "https://pnpm.io/",
+        description: "A fast, disk space-efficient package manager for JavaScript and Node.js projects.",
+        tags: ["📦 Package Manager", "⚡ Performance"],
+    },
+    {
+        name: "LazyGit",
+        link: "https://github.com/jesseduffield/lazygit/",
+        description: "A terminal UI for git commands, making it easier to manage repositories from the command line.",
+        tags: ["🖥️ Terminal Tool", "🌐 Version Control"]
+    }
+]
 ---
 
 <Main title="Resources" description="View my resources, including open-source projects, tutorials, and useful links I've compiled.">
-    <section id="resources-hero" class="flex flex-col gap-y-2 mb-8">
+    <section id="resources-hero" class="flex flex-col gap-y-2 mb-12">
         <Heading>📂 Resources</Heading>
         <p>
             I've learned a lot through building, teaching, and exploring - often by standing on the shoulders of great tools, ideas, and people.
@@ -72,29 +110,50 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
         </p>
     </section>
 
-    <section id="learning-paths" class="flex flex-col gap-y-2 mb-8">
+    <section id="learning-paths" class="flex flex-col gap-y-2 mb-12">
         <h3 class="text-2xl font-medium">🧭 Learning Paths</h3>
         <p>
             If you're new to a topic or unsure where to start, these learning paths offer a short, structured way in. Each path is intentionally lightweight, with a small number of hand-picked resources and brief context on why they matter.
         </p>
 
-        <div class="grid md:grid-cols-3 gap-4 my-2">
+        <ContentGrid
+            collection="resources"
+            filter={(resource: CollectionEntry<"resources">) => resource.data.type === "🧭 Learning Path"}
+            sort={(a: CollectionEntry<"resources">, b: CollectionEntry<"resources">) =>
+                a.data.title.localeCompare(b.data.title)
+            }
+        />
+    </section>
+
+    <section id="tools-software" class="flex flex-col gap-y-2 mb-12">
+        <h3 class="text-2xl font-medium">🛠️ Tools & Software I Use</h3>
+        <p>
+            These are tools I actively use or recommend - not because they're trendy, but because they've proven useful in real projects, workshops, and everyday workflows.
+        </p>
+
+        <p>
+            Where relevant, I've included brief notes on how I use each tool or what makes it stand out.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-4 my-4">
             {
-                learningPaths.map((path) => {
+                tools.sort(
+                    (a, b) => a.name.localeCompare(b.name)
+                ).map((tool) => {
                     return (
                         <div class="flex flex-col border border-neutral-200 hover:border-primary rounded-2xl p-4 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-black/10 hover:shadow-lg transition-all duration-200 ease-in-out cursor-default">
                             <article>
-                                <h3 class="text-xl font-medium">{ path.data.title }</h3>
-                                <p class="mt-2">
-                                    { path.data.description }
+                                <h4 class="text-xl font-semibold mt-2">{ tool.name }</h4>
+                                <p>
+                                    { tool.description }
                                 </p>
-                                <div class="mt-4">
-                                    <Link url={ `/resources/${ path.id }` } text="Explore learning path" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+                                <div class="mt-2">
+                                    <Link url={ tool.link } text={ `View ${ tool.name }` } icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
                                 </div>
 
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     {
-                                        sortTags(formatTags(path.data.tags)).map((tag) => (
+                                        formatTags(tool.tags).sort().map((tag) => (
                                             <Tag>{ `${ tag }` }</Tag>
                                         ))
                                     }
@@ -107,20 +166,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
         </div>
     </section>
 
-    <!-- <section id="tools-software" class="flex flex-col gap-y-2 mb-8">
-        <h3 class="text-2xl font-medium">🛠️ Tools & Software I Use</h3>
-        <p>
-            These are tools I actively use or recommend - not because they're trendy, but because they've proven useful in real projects, workshops, and everyday workflows.
-        </p>
-
-        <p>
-            Where relevant, I've included brief notes on how I use each tool or what makes it stand out.
-        </p>
-
-
-    </section>
-
-    <section id="workshop-resources" class="flex flex-col gap-y-2 mb-8">
+    <section id="workshop-resources" class="flex flex-col gap-y-2 mb-12">
         <h3 class="text-2xl font-medium">📚 Workshop Resources</h3>
         <p>
             Resources from workshops and sessions I've run or contributed to. These are designed to be practical, reusable, and beginner-friendly.
@@ -129,9 +175,17 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
         <p>
             If you attended a session, this is a good place to revisit materials. If you didn't, many of these resources still stand on their own.
         </p>
-    </section> -->
 
-    <section id="recommended-read-watch" class="flex flex-col gap-y-2 mb-8">
+        <ContentGrid
+            collection="resources"
+            filter={(resource: CollectionEntry<"resources">) => resource.data.type === "🛠️ Workshop"}
+            sort={(a: CollectionEntry<"resources">, b: CollectionEntry<"resources">) =>
+                a.data.title.localeCompare(b.data.title)
+            }
+        />
+    </section>
+
+    <section id="recommended-read-watch" class="flex flex-col gap-y-2 mb-12">
         <h3 class="text-2xl font-medium">🔗 Recommended Reading & Watching</h3>
         <p>
             A curated selection of articles, talks, and papers that have shaped how I think about technology, learning, and building.
@@ -141,7 +195,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
             This isn’t an exhaustive list - just things I genuinely return to or frequently recommend.
         </p>
 
-        <div class="grid md:grid-cols-2 gap-4">
+        <div class="grid md:grid-cols-2 gap-4 my-4">
             {
                 recommendations.sort(
                     (a, b) => a.title.localeCompare(b.title)
@@ -155,7 +209,7 @@ const learningPaths = await getCollection("resources", ({ data }) => data.type =
                                     { item.description }
                                 </p>
                                 <div class="mt-2">
-                                    <Link url={ item.link } text="View" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+                                    <Link url={ item.link } text={ `View ${ stripEmojiLabel(item.type) }` } icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
                                 </div>
 
                                 <div class="mt-4 flex flex-wrap gap-2">
