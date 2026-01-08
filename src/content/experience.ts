@@ -2,7 +2,7 @@ export const experienceJson = [
     {
         "role": "Emerging Professionals Committee Member",
         "company": "Australian Computer Society",
-        "startDate": new Date("2026-01-01"),
+        "startDate": new Date("2025-12-19"),
         "endDate": null,
         "description": "Delivered hands-on STEM outreach for local high schools, introducing students to QUT engineering degrees and study pathways.",
         "skills": ["🎤 Public Speaking", "👥 Leadership", "📅 Event Coordination", "🌐 Cross-Team Collaboration"]

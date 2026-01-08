@@ -5,6 +5,8 @@ import Heading from "@components/Heading.astro"
 import Subheading from "@components/Subheading.astro"
 import ContentGrid from "@/components/ContentGrid.astro"
 
+import { SOCIAL_LINKS } from "@/consts"
+
 import { getCollection, type CollectionEntry } from "astro:content"
 
 const featuredPosts = (await getCollection("posts", ({ data }) => {
@@ -27,7 +29,7 @@ const featuredProjects = (await getCollection("projects", ({ data }) => {
         </p>
 
         <p>
-            This site brings together a selection of projects, resources, and writeups that reflect how I build, learn, and share knowledge. Feel free to explore and reach out if anything catches your interest!
+            This site brings together a selection of projects, resources, and writeups that reflect how I build, learn, and share knowledge. If you’d like to connect or keep up with what I’m working on, you can find me on <a href={SOCIAL_LINKS[1].url} class="link">LinkedIn</a> and <a href={SOCIAL_LINKS[2].url} class="link">Instagram</a>, feel free to reach out if anything here catches your interest!
         </p>
     </section>
 

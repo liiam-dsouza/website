@@ -75,3 +75,12 @@ export const slugify = (input: string): string => {
         .replace(/-+/g, "-")      // collapse multiple dashes
 }
 
+export const stripEmojiLabel = (input: string): string => {
+    return input
+        .replace(
+        /^[\p{Extended_Pictographic}\p{Emoji_Presentation}\p{Emoji}\uFE0F\u200D]+/gu,
+        ""
+        )
+        .trim()
+}
+
