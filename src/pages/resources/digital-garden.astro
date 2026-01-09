@@ -1,0 +1,117 @@
+---
+import Heading from "@/components/Heading.astro"
+import Main from "@layouts/Main.astro"
+import Tag from "@/components/Tag.astro"
+import Link from "@/components/Link.astro"
+import { formatTags, sortTags, stripEmojiLabel } from "@/utils/helpers"
+
+import { getCollection, type CollectionEntry } from "astro:content"
+import ContentGrid from "@/components/ContentGrid.astro"
+import Subheading from "@/components/Subheading.astro"
+
+const recommendations = [
+    {
+        title: "Network Chuck",
+        type: "🎬 YouTube Channel",
+        link: "https://www.youtube.com/@NetworkChuck",
+        description: "Great tutorials and explanations on networking, cloud computing, and various IT topics.",
+        tags: ["🛜 Networking", "☁️ Cloud"]
+    },
+    {
+        title: "W3Schools",
+        type: "🌐 Website",
+        link: "https://www.w3schools.com/",
+        description: "A comprehensive resource for learning web technologies, including HTML, CSS, JavaScript, and more.",
+        tags: ["🌐 Web Development"]
+    },
+    {
+        title: "Eloquent JavaScript",
+        type: "📚 Book",
+        link: "https://eloquentjavascript.net/",
+        description: "A modern introduction to programming using JavaScript, covering both basic and advanced topics.",
+        tags: ["💻 Programming", "🌐 Web Development", "🟨 JavaScript"]
+    },
+    {
+        title: "Dreams of Code",
+        type: "🎬 Youtube Channel",
+        link: "https://www.youtube.com/@DreamsOfCode",
+        description: "Computer Science, Software Engineering, Development and Programming Tutorials.",
+        tags: ["💻 Programming", "⚙️ Software Engineering"]
+    },
+    {
+        title: "Why Language Models Hallucinate",
+        type: "📝 Article",
+        link: "https://openai.com/index/why-language-models-hallucinate/",
+        description: "An in-depth look at why large language models sometimes produce incorrect or nonsensical information.",
+        tags: ["🤖 AI", "🧠 Machine Learning"]
+    },
+    {
+        title: "typecraft",
+        type: "🎬 YouTube Channel",
+        link: "https://www.youtube.com/@typecraft_dev",
+        description: "Videos on how to master modern programming tools, workflows, and productivity setups.",
+        tags: ["⚡ Productivity", "🛠️ Programming Tools"]
+    }
+]
+
+const tools = [
+    {
+        name: "Visual Studio Code",
+        link: "https://code.visualstudio.com/",
+        description: "A powerful, extensible code editor with a rich ecosystem of plugins and features.",
+        tags: ["💻 Code Editor", "⚙️ Development"]
+    },
+    {
+        name: "GitHub",
+        link: "https://github.com/",
+        description: "A platform for version control and collaboration, allowing developers to host and review code.",
+        tags: ["🌐 Version Control", "🤝 Collaboration"]
+    },
+    {
+        name: "Ghostty",
+        link: "https://ghostty.org/",
+        description: "A fast and cross-platform terminal emulator that uses platform-native UI and GPU acceleration.",
+        tags: ["🖥️ Terminal Emulator", "⚡ Performance"],
+    },
+    {
+        name: "Docker",
+        link: "https://www.docker.com/",
+        description: "A platform designed to help developers build, share, and run container applications",
+        tags: ["🐳 Containerisation", "⚙️ DevOps"],
+    },
+    {
+        name: "PNPM",
+        link: "https://pnpm.io/",
+        description: "A fast, disk space-efficient package manager for JavaScript and Node.js projects.",
+        tags: ["📦 Package Manager", "⚡ Performance"],
+    },
+    {
+        name: "LazyGit",
+        link: "https://github.com/jesseduffield/lazygit/",
+        description: "A terminal UI for git commands, making it easier to manage repositories from the command line.",
+        tags: ["🖥️ Terminal Tool", "🌐 Version Control"]
+    }
+]
+---
+
+<Main title="Resources" description="View my resources, including open-source projects, tutorials, and useful links I've compiled.">
+    <section id="resources-hero" class="flex flex-col gap-y-2 mb-12">
+        <Heading>🌺 Digital Garden</Heading>
+        <Subheading>A living collection of small experiments, notes, and ideas I’m currently exploring as I learn and build.</Subheading>
+
+        <p>
+            This is my digital garden: a place for small experiments, rough notes, and ideas I’m actively exploring. Not everything here is polished or complete, and that’s the point. I use this space to think out loud and learn in public.
+        </p>
+
+        <ContentGrid
+            collection="resources"
+            filter={(resource: CollectionEntry<"resources">) => resource.data.type === "🌺 Digital Garden"}
+            sort={(a: CollectionEntry<"resources">, b: CollectionEntry<"resources">) =>
+                a.data.title.localeCompare(b.data.title)
+            }
+            buttons
+            tagField="status"
+        />
+    </section>
+</Main>
+

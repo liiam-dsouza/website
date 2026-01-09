@@ -3,7 +3,7 @@ import Heading from "@/components/Heading.astro"
 import Main from "@layouts/Main.astro"
 import Tag from "@/components/Tag.astro"
 import Link from "@/components/Link.astro"
-import { formatTags, stripEmojiLabel } from "@/utils/helpers"
+import { formatTags, sortTags, stripEmojiLabel } from "@/utils/helpers"
 
 import { getCollection, type CollectionEntry } from "astro:content"
 import ContentGrid from "@/components/ContentGrid.astro"
@@ -125,6 +125,24 @@ const tools = [
         />
     </section>
 
+    <section id="digital-garden" class="flex flex-col gap-y-2 mb-12">
+        <h3 class="text-2xl font-medium">🌺 Digital Garden</h3>
+        <p>
+            A living collection of small experiments, notes, and ideas I’m currently exploring as I learn and build.
+        </p>
+
+        <ContentGrid
+            collection="resources"
+            filter={(resource: CollectionEntry<"resources">) => resource.data.type === "🌺 Digital Garden"}
+            sort={(a: CollectionEntry<"resources">, b: CollectionEntry<"resources">) =>
+                a.data.title.localeCompare(b.data.title)
+            }
+            slice={[0, 1]}
+        />
+
+        <Link url="/resources/digital-garden" text="Explore the digital garden" icon={{ name: "arrow-big-right-lines", side: "right"   }} animated />
+    </section>
+
     <section id="tools-software" class="flex flex-col gap-y-2 mb-12">
         <h3 class="text-2xl font-medium">🛠️ Tools & Software I Use</h3>
         <p>
@@ -153,7 +171,7 @@ const tools = [
 
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     {
-                                        formatTags(tool.tags).sort().map((tag) => (
+                                        sortTags(formatTags(tool.tags)).map((tag) => (
                                             <Tag>{ `${ tag }` }</Tag>
                                         ))
                                     }
@@ -214,7 +232,7 @@ const tools = [
 
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     {
-                                        formatTags(item.tags).sort().map((tag) => (
+                                        sortTags(formatTags(item.tags)).map((tag) => (
                                             <Tag>{ `${ tag }` }</Tag>
                                         ))
                                     }

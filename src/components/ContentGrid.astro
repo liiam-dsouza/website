@@ -36,6 +36,7 @@ type ResourceProps = {
         b: CollectionEntry<"resources">
     ) => number
     slice?: [number, number]
+    tagField?: "type" | "status"
 }
 
 type Props = PostProps | ProjectProps | ResourceProps
@@ -102,10 +103,14 @@ if (props.collection === "resources") {
         const [start, end] = props.slice
         resources = resources.slice(start, end)
     }
+    const field = props.tagField || "type"
     tags = Array.from(
         new Set(
             resources
-            .flatMap((resource) => resource.data.type)
+            .flatMap((resource) => {
+                const value = resource.data[field]
+                return Array.isArray(value) ? value : [value]
+            })
             .filter(Boolean)
         )
     )
@@ -162,22 +167,24 @@ if (props.collection === "resources") {
         }
         {
             props.collection === "resources" &&
-            resources.map(resource => (
-                <article
-                    class="card"
-                    data-tags={ slugify(getTagId(resource.data.type)) }
-                >
-                    <ContentCard
-                        collection="resources"
-                        id={resource.id}
-                        title={resource.data.title}
-                        description={resource.data.description}
-                        tags={resource.data.tags}
-                        type={resource.data.type}
-                        linkText={ `Explore ${ stripEmojiLabel(resource.data.type) } Resources` }
-                    />
-                </article>
-            ))
+            resources.map(resource => {
+                return (
+                    <article
+                        class="card"
+                        data-tags={ slugify(getTagId(resource.data.status ? resource.data.status : resource.data.type)) }
+                    >
+                        <ContentCard
+                            collection="resources"
+                            id={resource.id}
+                            title={resource.data.title}
+                            description={resource.data.description}
+                            tags={resource.data.tags}
+                            type={resource.data.status ? resource.data.status : resource.data.type}
+                            linkText={ `View ${ stripEmojiLabel(resource.data.type) } entry` }
+                        />
+                    </article>
+                )
+            })
         }
     </div>
 </section>
