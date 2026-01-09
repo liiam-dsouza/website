@@ -1,0 +1,27 @@
+---
+title: Tiny slugify helper
+description: A small utility function to convert strings into URL-friendly slugs.
+type: 🌺 Digital Garden
+tags: [⚙️ Utilities, 🟦 TypeScript]
+status: 🌱 Seedling
+---
+
+## Context
+When building web applications, it's often necessary to create URL-friendly slugs from strings, such as titles or names. A slug is a simplified version of a string that can be used in URLs, typically consisting of lowercase letters, numbers, and hyphens.
+
+## The idea
+The `slugify` helper function takes a string as input and transforms it into a slug by:
+1. Converting the string to lowercase.
+2. Replacing spaces and special characters with hyphens.
+3. Removing any non-alphanumeric characters except for hyphens.
+
+```typescript
+export const slugify = (input: string): string => {
+    return input
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "") // remove non-word characters
+        .replace(/\s+/g, "-")     // spaces → dashes
+        .replace(/-+/g, "-")      // collapse multiple dashes
+}
+```

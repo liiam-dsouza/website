@@ -17,11 +17,11 @@ export default defineConfig({
             tailwindcss()
         ],
     },
-    markdown: {
-        shikiConfig: {
-            theme: 'snazzy-light',
-        },
-    },
+    // markdown: {
+    //     shikiConfig: {
+    //         theme: 'snazzy-light',
+    //     },
+    // },
 
     integrations: [
         icon(),

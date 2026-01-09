@@ -97,6 +97,7 @@ const resources = defineCollection({
         type: z.string(),
         tags: z.array(z.string()),
         difficulty: z.string().optional(),
+        status: z.string().optional(),
         featured: z.boolean().optional().default(false),
     }),
 })
