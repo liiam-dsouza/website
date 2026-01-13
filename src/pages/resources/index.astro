@@ -5,7 +5,7 @@ import Tag from "@/components/Tag.astro"
 import Link from "@/components/Link.astro"
 import { formatTags, sortTags, stripEmojiLabel } from "@/utils/helpers"
 
-import { getCollection, type CollectionEntry } from "astro:content"
+import { type CollectionEntry } from "astro:content"
 import ContentGrid from "@/components/ContentGrid.astro"
 
 const recommendations = [
@@ -50,6 +50,20 @@ const recommendations = [
         link: "https://www.youtube.com/@typecraft_dev",
         description: "Videos on how to master modern programming tools, workflows, and productivity setups.",
         tags: ["⚡ Productivity", "🛠️ Programming Tools"]
+    },
+    {
+        title: "Build Your Own X",
+        type: "🐙 GitHub Repository",
+        link: "https://github.com/codecrafters-io/build-your-own-x",
+        description: "A collection of tutorials that guide you through building your own implementations of various technologies from scratch.",
+        tags: ["💻 Programming", "🛠️ Development"]
+    },
+    {
+        title: "Better Stack",
+        type: "🎬 YouTube Channel",
+        link: "https://www.youtube.com/@betterstack",
+        description: "Latest tech news and tutorials on web development, programming, and software engineering.",
+        tags: ["🌐 Web Development", "💻 Programming", "📰 Tech News"]
     }
 ]
 
@@ -204,9 +218,9 @@ const tools = [
     </section>
 
     <section id="recommended-read-watch" class="flex flex-col gap-y-2 mb-12">
-        <h3 class="text-2xl font-medium">🔗 Recommended Reading & Watching</h3>
+        <h3 class="text-2xl font-medium">🔗 Recommended Reading, Watching & Learning</h3>
         <p>
-            A curated selection of articles, talks, and papers that have shaped how I think about technology, learning, and building.
+            A curated selection of articles, talks, and learning materials that have shaped how I think about technology, learning, and building.
         </p>
 
         <p>
