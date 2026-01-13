@@ -128,7 +128,6 @@ if (props.collection === "resources") {
                     class="card"
                     data-tags={ slugify(getTagId(post.data.type)) }
                 >
-                    {/* <PostCard post={post} /> */}
                     <ContentCard
                         collection="posts"
                         id={post.id}
@@ -155,8 +154,8 @@ if (props.collection === "resources") {
                         description={project.data.description}
                         tags={project.data.tags}
                         type={project.data.category}
-                        start={new Date(project.data.startDate)}
-                        end={project.data.endDate ? new Date(project.data.endDate) : undefined}
+                        start={project.data.startDate}
+                        end={project.data.endDate ? project.data.endDate : undefined}
                         cover={project.data.cover}
                         coverAlt={project.data.coverAlt}
                         status={project.data.status}
