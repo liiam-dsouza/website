@@ -4,7 +4,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content"
 import PostWrapper from "@layouts/PostWrapper.astro"
 
 export async function getStaticPaths() {
-    const posts = await getCollection("posts")
+    const posts = await getCollection("posts", ({ data }) => !data.draft)
 
     const sortedPosts = posts.sort(
         (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
